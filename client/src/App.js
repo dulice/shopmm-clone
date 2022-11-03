@@ -1,7 +1,5 @@
 import { Box } from '@mui/material';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Footer from './components/Footer/Footer';
-import Navigation from './components/Navigation/Navigation';
+import { Route, Routes } from 'react-router-dom';
 import Product from './pages/Product';
 import CartProducts from './pages/CartProducts';
 import CustomerCare from './pages/CustomerCare';
@@ -25,8 +23,6 @@ import OrderDetail from './pages/OrderDetail';
 function App() {
   return (
     <Box sx={{minWidth: "1024px"}}>
-      <BrowserRouter>
-        <Navigation />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/signup' element={<Signup />} />
@@ -47,8 +43,6 @@ function App() {
           <Route path='/success' element={<UserProtected><Success /></UserProtected>} />
           <Route path="*" element={<Error />} />
         </Routes>
-        <Footer />
-      </BrowserRouter>
     </Box>
   );
 }

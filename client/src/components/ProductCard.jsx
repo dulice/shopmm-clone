@@ -8,14 +8,24 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cartProductSlice";
 
 const ProductCard = ({ product }) => {
+  const { user } = useSelector(state => state.user);
+  const navigate = useNavigate();
   const discountAmount = (price, discount) => {
     return price - (price * discount) / 100;
   };
+
+  const handleAddToCart = () => {
+    if(user) {
+      dispatch(addToCart(product));
+    } else {
+      navigate('/login');
+    }
+  }
 
   const dispatch = useDispatch();
   return (
@@ -52,7 +62,7 @@ const ProductCard = ({ product }) => {
             </Box>
           </Link>
           <CardActions>
-            <Button variant="contained" onClick={() => dispatch(addToCart(product))}>
+            <Button variant="contained" onClick={handleAddToCart}>
               Add To Cart
             </Button>
           </CardActions>

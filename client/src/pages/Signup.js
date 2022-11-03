@@ -25,7 +25,8 @@ import dayjs from "dayjs";
 import { useUserSignupMutation } from "../api/userApi";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { register } from "../features/userSlice";
+import { logout, register } from "../features/userSlice";
+import { resetItems } from "../features/cartProductSlice";
 
 const Signup = () => {
   const [dateOfBirth, setDateOfBirth] = useState(dayjs());
@@ -82,12 +83,14 @@ const Signup = () => {
   };
 
   const handleSignup = async (e) => {
+    dispatch(logout());
+    dispatch(resetItems());
     e.preventDefault();
     try {
       if (password !== confirmPassword)
         return toast.error("Password do not match.");
-      const { data } = await userSignup({ username, email, password, dateOfBirth, }).unwrap();
-      dispatch(register({ user: data }));
+      const data = await userSignup({ username, email, password, dateOfBirth, }).unwrap();
+      dispatch(register(data));
       navigate('/login');
     } catch (err) {
       toast.error(err.data.message);
@@ -117,7 +120,6 @@ const Signup = () => {
                   value={email}
                   onChange={handleChangeEmail}
                 />
-                {/* <TextField label="Password" variant="outlined" /> */}
                 <FormControl>
                   <InputLabel htmlFor="password">Password</InputLabel>
                   <OutlinedInput

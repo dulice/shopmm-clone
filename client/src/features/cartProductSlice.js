@@ -22,7 +22,7 @@ const priceDetail = (state) => {
         price += itemPrice;
         return price;
     });
-    state.productsPrice = priceArr[priceArr.length - 1];
+    state.productsPrice = priceArr[priceArr.length - 1] || 0 ;
     state.shippingFees = 2990;
     state.totalPrice = price + state.shippingFees;
     localStorage.setItem('productsPrice', JSON.stringify(state.productsPrice));
@@ -33,9 +33,9 @@ const cartProductSlice = createSlice({
     name: "cartItems",
     initialState: {
         items: JSON.parse(localStorage.getItem('cartItems')) || [],
-        productsPrice: JSON.parse(localStorage.getItem('productsPrice')) || '',
-        shippingFees: 1500,
-        totalPrice: JSON.parse(localStorage.getItem('totalPrice')) || '',
+        productsPrice: JSON.parse(localStorage.getItem('productsPrice')) || 0,
+        shippingFees: 2990,
+        totalPrice: JSON.parse(localStorage.getItem('totalPrice')) || 0,
         address: JSON.parse(localStorage.getItem('address')) || {},
     },
     reducers: {
@@ -55,6 +55,9 @@ const cartProductSlice = createSlice({
         },
         removeFromCart: (state, action) => {
             const currentItem = state.items.find(item => item._id === action.payload._id);
+            if(state.items.length >= 0 ) {
+                localStorage.removeItem("productsPrice");
+            }
             if(currentItem.quantity > 1) {
                 currentItem.quantity -= 1
                 state.items = [...state.items];
@@ -68,9 +71,19 @@ const cartProductSlice = createSlice({
         addAddress: (state, action) => {
             state.address = action.payload;
             localStorage.setItem("address", JSON.stringify(state.address));
+        },
+        resetItems: (state, action) => {
+            state.items = [];
+            state.productsPrice = 0;
+            state.totalPrice = 0;
+            state.address = {};
+            localStorage.removeItem('cartItems');
+            localStorage.removeItem('productsPrice');
+            localStorage.removeItem('totalPrice');
+            localStorage.removeItem('address');
         }
     }
 })
 
-export const { addToCart, removeFromCart, addAddress } = cartProductSlice.actions;
+export const { addToCart, removeFromCart, addAddress, resetItems } = cartProductSlice.actions;
 export default cartProductSlice.reducer;

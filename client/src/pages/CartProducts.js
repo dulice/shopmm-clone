@@ -64,8 +64,8 @@ const CartProducts = () => {
                               />
                             </Box>
                             <Typography variant="caption" noWrap>
-                              {discountAmount(item.price, item.discount)} x {item.quantity} ={" "}
-                              {discountAmount(item.price, item.discount) * item.quantity}
+                              Ks {discountAmount(item.price, item.discount)} x {item.quantity} ={" "}
+                              Ks {discountAmount(item.price, item.discount) * item.quantity}
                             </Typography>
                           </Grid>
                         </Grid>

@@ -19,10 +19,12 @@ const ThirdNav = () => {
         showLabels
         sx={{
           whiteSpace: "nowrap",
-          display: "inline-block",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start"
         }}
       >
-        <BottomNavigationAction label={<CategoriesNav />} />
+        <span style={{marginBottom: 5}}><CategoriesNav /></span>
         <BottomNavigationAction
           label={
             <Link to="/" className="nav-link">

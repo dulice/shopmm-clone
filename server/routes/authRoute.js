@@ -19,6 +19,7 @@ router.post('/signup', async (req, res) => {
             email: req.body.email,
             password: hashPassword,
             source: "local",
+            isAdmin: req.body.isAdmin || false,
         });
         await newUser.save();
         return res.status(200).json(newUser);

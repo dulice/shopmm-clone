@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Grid } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 import React from 'react'
 import { useProductsQuery } from '../api/productApi';
 import ProductCard from '../components/ProductCard';

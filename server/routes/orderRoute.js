@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require("express");
 const { sendMail } = require('../mail');
 const Order = require('../models/OrderSchema');
+const User = require('../models/UserSchema');
+const Product = require('../models/ProductSchema');
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const CLIENT_URL =  process.env.CLIENT_URL || "http://localhost:3000";
 const router = express.Router();
@@ -23,6 +25,62 @@ router.get('/', async (req, res) => {
     res.send(200).json(orders);
   } catch (err) {
     res.status(500).json({message: err.message});
+  }
+});
+
+//get all users
+router.get('/user', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+})
+
+// total sale
+router.get('/summary', async (req, res) => {
+  try {
+    const orders = await Order.aggregate([{
+      $group: {
+        _id: null,
+        totalSale: {$sum: "$totalPrice"},
+        numberOfOrders: {$sum: 1},
+      }
+    }]);
+
+    const dailyOrders = await Order.aggregate([{
+      $group: {
+        _id: {$dateToString: {format: '%Y-%m-%d', date: "$createdAt"}},
+        totalSale: {$sum: "$totalPrice"},
+        numberOfOrders: {$sum: 1},
+      }
+    }]);
+
+    const users = await User.aggregate([{
+      $group: {
+        _id: null,
+        numberOfUsers: {$sum: 1},
+      }
+    }])
+
+    const products = await Product.aggregate([{
+      $group: {
+        _id: '$category',
+        numberOfProducts: {$sum: 1},        
+      }
+    }]).sort({ "createdAt": 1});
+
+    const totalProducts = await Product.aggregate([{
+      $group: {
+        _id: null,
+        numberOfProducts: {$sum: 1},
+      }
+    }])
+
+    res.status(200).json({orders, dailyOrders, users, products, totalProducts});
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 })
 

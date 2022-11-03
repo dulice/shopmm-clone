@@ -11,15 +11,15 @@ const OrderPrice = () => {
         <tbody>
           <tr>
             <td>SubTotal: </td>
-            <td> {productsPrice} </td>
+            <td>Ks {productsPrice} </td>
           </tr>
           <tr>
             <td>Shipping Fees: </td>
-            <td> {shippingFees} </td>
+            <td>Ks {shippingFees} </td>
           </tr>
           <tr>
             <td>Total: </td>
-            <td> {totalPrice} </td>
+            <td>Ks {totalPrice} </td>
           </tr>
         </tbody>
       </table>

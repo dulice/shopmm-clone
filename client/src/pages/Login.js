@@ -19,7 +19,8 @@ import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useUserLoginMutation } from "../api/userApi";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { register } from "../features/userSlice";
+import { register, logout } from "../features/userSlice";
+import { resetItems } from "../features/cartProductSlice";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -53,9 +54,11 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    dispatch(logout());
+    dispatch(resetItems());
     try {
-      const { data } = await userLogin({ email, password }).unwrap();
-      dispatch(register({ user: data }));
+      const data = await userLogin({ email, password }).unwrap();
+      dispatch(register(data));
       navigate("/");
     } catch (err) {
       toast.error(err.data.message);
@@ -98,7 +101,7 @@ const Login = () => {
                         <IconButton
                           onClick={() => setShowPassword(!showPassword)}
                         >
-                          {password ? <VisibilityOff /> : <Visibility />}
+                          {!showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       </InputAdornment>
                     }
