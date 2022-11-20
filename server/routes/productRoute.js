@@ -103,4 +103,28 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//write review
+router.put("/review/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if(product) {
+      const alreadyReview = product.reviews.find(review => review.user.toString() === req.body.user.toString());
+      if(alreadyReview) return res.status(400).json("You already review");
+      const reviewer = {
+        user: req.body.user,
+        reviewerName: req.body.reviewerName,
+        comment: req.body.comment,
+        rating: req.body.rating,
+      }
+      product.reviews.push(reviewer);
+      product.rating = product.reviews.reduce((sum, num) => sum + num.rating, 0) / product.reviews.length;
+      await product.save();
+      res.status(200).json(product);
+    }
+  } catch (err) {
+    res.status(500).json({message: err.message})
+  }
+
+})
+
 module.exports = router;

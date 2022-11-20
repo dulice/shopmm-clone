@@ -9,6 +9,8 @@ import {
   Typography,
   Alert,
   Rating,
+  Card,
+  CardContent,
 } from "@mui/material";
 import { useSingleProductQuery } from "../api/productApi";
 import Loading from "../components/Loading";
@@ -59,7 +61,7 @@ const Product = () => {
                   <Rating name="read-only" value={product.rating} readOnly />
                   <Typography fontSize={14} sx={{ ml: 2 }} color="gray">
                     {product.reviews.length > 0
-                      ? product.reviews.length("people reviews.")
+                      ? `${product.reviews.length} people reviews.`
                       : "No rating yet"}
                   </Typography>
                 </Box>
@@ -101,6 +103,19 @@ const Product = () => {
               ))}
             </ul>
           </Stack>
+          <Box>
+            {product.reviews.map(review => (
+              <Card key={review._id}>
+                <CardContent>
+                  <Stack spacing={2}>
+                    <Typography variant="body2" color="gray">{review.reviewerName}</Typography>
+                    <Rating value={review.rating} readOnly/>
+                    <Typography variant="body2">{review.comment}</Typography>
+                  </Stack>
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
         </>
       )}
     </Container>

@@ -38,7 +38,7 @@ import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
 import VirtualReality from "layouts/virtual-reality";
-import RTL from "layouts/rtl";
+import Orders from "layouts/orders";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
@@ -84,11 +84,11 @@ const routes = [
   },
   {
     type: "route",
-    name: "RTL",
-    key: "rtl",
-    route: "/rtl",
-    icon: <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-world-2" />,
-    component: <RTL />,
+    name: "Orders",
+    key: "orders",
+    route: "/orders",
+    icon: <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-archive-2" />,
+    component: <Orders />,
   },
   {
     type: "route",

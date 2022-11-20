@@ -4,16 +4,16 @@ import userApi from 'api/userApi';
 const userSlice = createSlice({
     name: 'User',
     initialState: {
-        user: JSON.parse(localStorage.getItem('user')) || null,
+        user: JSON.parse(localStorage.getItem('dashboardUser')) || null,
     },
     reducers: {
         register: (state, action) => {
             state.user = action.payload
-            localStorage.setItem('user', JSON.stringify(state.user));
+            localStorage.setItem('dashboardUser', JSON.stringify(state.user));
         },
         logout: (state, action) => {
             state.user = null
-            localStorage.removeItem('user');
+            localStorage.removeItem('dashboardUser');
         },
     },
     extraReducers: ( builder ) => {

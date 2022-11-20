@@ -21,7 +21,7 @@ const JustForYou = () => {
       setIsLoading(true);
       try {
         const { data } = await axios.get("/products");
-        setProducts(randomProduct(data, data.length));
+        setProducts(randomProduct(data, 18));
         setIsLoading(false);
       } catch (err) {
         console.log(err.response.data.message);

@@ -14,11 +14,11 @@ import {
   Button,
   Stack,
 } from "@mui/material";
+import OrderItem from "../components/OrderItem";
 
 const TrackOrder = () => {
   const { user } = useSelector((state) => state.user);
   const { data, isLoading } = useTrackOrderQuery(user._id);
-  console.log(data);
   return (
     <Box>
       <Container>
@@ -37,17 +37,10 @@ const TrackOrder = () => {
               <Card key={order._id}>
                 <CardContent>
                   <Grid container spacing={3}>
-                    {order.items.map((item) => (
-                      <>
-                        <Grid item xs={2} key={item._id}>
-                          <img src={item.images[0]} alt="" width="100%" />
-                        </Grid>
-                        <Grid item xs={7}>
-                          <Typography variant="body2">
-                            {item.productName}
-                          </Typography>
-                        </Grid>
-                      </>
+                    {order.items.map((item, index) => (
+                      <Grid item xs={9} key={index}>
+                        <OrderItem item={item} />
+                      </Grid>
                     ))}
                     <Grid item xs={3}>
                       <table>
@@ -69,6 +62,16 @@ const TrackOrder = () => {
                       <Button variant="contained" color="error" sx={{ my: 1 }}>
                         {order.isDelivered}
                       </Button>
+                      {order.isDelivered === "delivered" && (
+                        <Link to={`/review/${order._id}`} style={{textDecoration: "none"}}>
+                          <Button
+                            variant="contained"
+                            sx={{ m: 1 }}
+                          >
+                            Review
+                          </Button>
+                        </Link>
+                      )}
                       <br />
                       <Link to={`/order/${order._id}`}>View Details</Link>
                     </Grid>

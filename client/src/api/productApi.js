@@ -29,9 +29,16 @@ const productApi = createApi({
             query: (slug) => ({
                 url: `/categories/${slug}`
             })
-        }),       
+        }), 
+        review: builder.mutation({
+            query: ({id, ...body}) => ({
+                url: `/review/${id}`,
+                method: 'PUT',
+                body,
+            })
+        })      
     })
 });
 
-export const { useProductsQuery, useSingleProductQuery, useSearchProductQuery, useCategoriesQuery, useSlugProductQuery } = productApi;
+export const { useProductsQuery, useSingleProductQuery, useSearchProductQuery, useCategoriesQuery, useSlugProductQuery, useReviewMutation } = productApi;
 export default productApi;

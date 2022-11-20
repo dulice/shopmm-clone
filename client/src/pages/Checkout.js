@@ -36,7 +36,7 @@ const Checkout = () => {
       window.location.href = data.url;
       if(data.url) {
         try {
-          const { data } = await axios.post('/orders', {
+          await axios.post('/orders', {
             customerId: user._id,
             items,
             productsPrice,
@@ -45,7 +45,6 @@ const Checkout = () => {
             address,
             isPaid: true,
           })
-          console.log(data);
           dispatch(resetItems());
         } catch (err) {
           if(err.response) {

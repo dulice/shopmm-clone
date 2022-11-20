@@ -19,7 +19,7 @@ import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useUserLoginMutation } from "../api/userApi";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { register, logout } from "../features/userSlice";
+import { register } from "../features/userSlice";
 import { resetItems } from "../features/cartProductSlice";
 
 const Login = () => {
@@ -54,7 +54,6 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch(logout());
     dispatch(resetItems());
     try {
       const data = await userLogin({ email, password }).unwrap();

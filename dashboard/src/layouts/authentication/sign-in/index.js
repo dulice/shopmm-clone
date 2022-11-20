@@ -89,9 +89,11 @@ function Illustration() {
     dispatch(logout());
     try {
       const data = await userLogin({ email, password }).unwrap();
+      console.log(data);
       dispatch(register(data));
       navigate("/");
     } catch (err) {
+      console.log(err);
       toast.error(err.data.message);
     }
   };

@@ -54,14 +54,14 @@ const OrderDetail = () => {
                     Receiver: {data.address.fullName}
                   </Typography>
                   <Typography variant="caption" color="gray">
-                    {data.address.address}, {data.address.city}, $
+                    {data.address.address}, {data.address.city}, 
                     {data.address.state}
                   </Typography>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent>
-                  <Stepper activeStep={0} orientation="vertical">
+                  <Stepper activeStep={data.isDelivered === "pending" ? 0 : 3} orientation="vertical">
                     {steps.map(step => (
                       <Step key={step.label}>
                         <StepLabel>{step.label}</StepLabel>
@@ -79,7 +79,7 @@ const OrderDetail = () => {
                         <Grid item xs={1} key={item._id}>
                           <img src={item.images[0]} alt="" width="100%" />
                         </Grid>
-                        <Grid item xs={7}>
+                        <Grid item xs={11}>
                           <Typography variant="body2">
                             {item.productName}
                           </Typography>

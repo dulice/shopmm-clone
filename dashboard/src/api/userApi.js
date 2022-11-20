@@ -19,7 +19,8 @@ const userApi = createApi({
                 url: '/login',
                 method: 'POST',
                 body: user
-            })
+            }),
+            providesTags: ['user'],
         }),
 
     })

@@ -1,23 +1,6 @@
 const router = require("express").Router();
 const cloudinary = require("../cloudinary");
 
-const cloudinaryImageUpload = async (file) => {
-  try {
-    const uploadImage = await cloudinary.uploader.upload(
-      file,
-      { folder: "ecom/products" },
-      (error, result) => {
-        if (error) {
-          console.log(error);
-        }
-      }
-    );
-    return uploadImage.secure_url;
-  } catch (err) {
-    res.status(500).json({ message: "Upload image error." });
-  }
-};
-
 router.post("/profile", async (req, res) => {
   try {
     const { avatar } = req.body;

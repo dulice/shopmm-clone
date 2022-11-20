@@ -6,8 +6,12 @@ import {
   BottomNavigationAction,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from '../../features/userSlice';
 
 const FirstNav = () => {
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   return (
     <Box>
       <Grid container>
@@ -58,9 +62,15 @@ const FirstNav = () => {
             <BottomNavigationAction
               value="login"
               label={
-                <Link className="nav-link uppercase" to="/login">
-                  login
-                </Link>
+                user ? (
+                  <Link className="nav-link uppercase" to="/login" onClick={() => dispatch(logout())}>
+                    Logout
+                  </Link>
+                ) : (
+                  <Link className="nav-link uppercase" to="/login">
+                    login
+                  </Link>
+                )
               }
             />
             <BottomNavigationAction

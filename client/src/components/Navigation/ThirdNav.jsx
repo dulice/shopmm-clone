@@ -12,6 +12,35 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import PercentOutlinedIcon from "@mui/icons-material/PercentOutlined";
 import CategoriesNav from "../CategoriesNav";
 
+const navs = [{
+  id: 1,
+  link: "/official-store",
+  Icon: MilitaryTechOutlinedIcon,
+  title: "Official Store"
+},
+{
+  id: 2,
+  link: "/shop-mart",
+  Icon: ShoppingCartCheckoutOutlinedIcon,
+  title: "Shop Mart"
+},{
+  id: 3,
+  link: "/sale",
+  Icon: ReceiptOutlined,
+  title: "El Sale"
+},{
+  id: 4,
+  link: "/shop-travel",
+  Icon: LocalShippingOutlinedIcon,
+  title: "Shop Travel"
+},{
+  id: 5,
+  link: "/new-arrival",
+  Icon: PercentOutlinedIcon,
+  title: "New Arrival"
+},
+]
+
 const ThirdNav = () => {
   return (
     <>
@@ -25,46 +54,16 @@ const ThirdNav = () => {
         }}
       >
         <span style={{marginBottom: 5}}><CategoriesNav /></span>
-        <BottomNavigationAction
-          label={
-            <Link to="/" className="nav-link">
-              <MilitaryTechOutlinedIcon />
-              <Typography variant="caption">Official Store</Typography>
-            </Link>
-          }
-        />
-        <BottomNavigationAction
-          label={
-            <Link to="/" className="nav-link">
-              <ShoppingCartCheckoutOutlinedIcon />
-              <Typography variant="caption">Shop Mart</Typography>
-            </Link>
-          }
-        />
-        <BottomNavigationAction
-          label={
-            <Link to="/sale" className="nav-link">
-              <ReceiptOutlined />
-              <Typography variant="caption">El Sale</Typography>
-            </Link>
-          }
-        />
-        <BottomNavigationAction
-          label={
-            <Link to="/" className="nav-link">
-              <LocalShippingOutlinedIcon />
-              <Typography variant="caption">Shop Travel</Typography>
-            </Link>
-          }
-        />
-        <BottomNavigationAction
-          label={
-            <Link to="/new-arrival" className="nav-link">
-              <PercentOutlinedIcon />
-              <Typography variant="caption">New Arrivals</Typography>
-            </Link>
-          }
-        />
+        {navs.map(nav => (
+          <BottomNavigationAction
+            label={
+              <Link to={nav.link} className="nav-link">
+                <nav.Icon />
+                <Typography variant="caption">{nav.title}</Typography>
+              </Link>
+            }
+          />
+        ))}
       </BottomNavigation>
     </>
   );
