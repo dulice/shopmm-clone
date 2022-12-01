@@ -45,7 +45,7 @@ import SignUp from "layouts/authentication/sign-up";
 
 // Shopmm Admin Dashboard MUI components
 import ArgonBox from "components/ArgonBox";
-import ProductCreate from "layouts/products";
+import Products from "layouts/products";
 
 const routes = [
   {
@@ -58,7 +58,7 @@ const routes = [
   },
   {
     type: "route",
-    name: "Tables",
+    name: "Users",
     key: "tables",
     route: "/tables",
     icon: (
@@ -92,11 +92,11 @@ const routes = [
   },
   {
     type: "route",
-    name: "Add Product",
-    key: "add-product",
-    route: "/add-product",
+    name: "Products",
+    key: "products",
+    route: "/products",
     icon: <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-basket" />,
-    component: <ProductCreate />,
+    component: <Products />,
   },
   { type: "title", title: "Account Pages", key: "account-pages" },
   {

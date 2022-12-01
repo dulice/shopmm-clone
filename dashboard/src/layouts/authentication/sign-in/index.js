@@ -89,7 +89,6 @@ function Illustration() {
     dispatch(logout());
     try {
       const data = await userLogin({ email, password }).unwrap();
-      console.log(data);
       dispatch(register(data));
       navigate("/");
     } catch (err) {
@@ -111,12 +110,12 @@ function Illustration() {
           "The more effortless the writing looks, the more effort the writer actually put into the process.",
       }}
     >
-              <ArgonBox mb={2}>
-          <Socials />
-        </ArgonBox>
-        <ArgonBox px={12}>
-          <Separator />
-        </ArgonBox>
+      <ArgonBox mb={2}>
+        <Socials />
+      </ArgonBox>
+      <ArgonBox px={12}>
+        <Separator />
+      </ArgonBox>
       <ArgonBox component="form" role="form" onSubmit={handleLogin}>
         <Stack spacing={3}>
           <TextField
@@ -159,7 +158,7 @@ function Illustration() {
         </ArgonBox>
         <ArgonBox mt={4} mb={1}>
           <ArgonButton color="info" size="large" fullWidth type="submit">
-            {isLoading ? "Signing In" : "Sign In" }
+            {isLoading ? "Signing In" : "Sign In"}
           </ArgonButton>
         </ArgonBox>
         <ArgonBox mt={3} textAlign="center">

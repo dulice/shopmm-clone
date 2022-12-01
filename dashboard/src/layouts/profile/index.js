@@ -1,21 +1,8 @@
-/**
-=========================================================
-* Shopmm Admin Dashboard MUI - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-material-ui
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import {Grid, Card, CardContent, Avatar, Typography, Box, Button} from "@mui/material";
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useGetProductsQuery } from 'api/productApi';
 
 // @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -30,7 +17,6 @@ import ArgonTypography from "components/ArgonTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Footer from "examples/Footer";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-import ProfilesList from "examples/Lists/ProfilesList";
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 import PlaceholderCard from "examples/Cards/PlaceholderCard";
 
@@ -39,7 +25,11 @@ import Header from "layouts/profile/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 
 // Data
-import profilesListData from "layouts/profile/data/profilesListData";
+import { io } from 'socket.io-client';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
+
+export const socket = io(process.env.REACT_APP_API_URL);
 
 // Images
 import homeDecor1 from "assets/images/home-decor-1.jpg";
@@ -53,6 +43,36 @@ const bgImage =
   "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg";
 
 function Overview() {
+  const { user } = useSelector(state => state.user);
+  const { data: products} = useGetProductsQuery();
+  const [customers, setCustomers] = useState([]);
+  const [currentRoom, setCurrentRoom] = useState("");
+  const navigate = useNavigate();
+
+  // get relative massages from customers
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const { data } = await axios.get(`/messages/admin-message?receiver=${user.username}`);
+        const chatData = [...new Map(data?.map((item) => [item.conversationId, item])).values()];
+        setCustomers(chatData);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchUser();
+  },[user]);
+
+  const fetchProduct = (productId) => {
+    return products?.find(product => product._id === productId);
+  }
+
+  const handleChat = (conversationId, productId) => {
+    navigate(`/chat/${productId}`);
+    socket.emit('room', conversationId, currentRoom);
+    setCurrentRoom(conversationId);
+  }
+
   return (
     <DashboardLayout
       sx={{
@@ -101,7 +121,20 @@ function Overview() {
             />
           </Grid>
           <Grid item xs={12} xl={4}>
-            <ProfilesList title="conversations" profiles={profilesListData} />
+            {customers.length > 0 && customers.map((cus, index) => (
+              <Card key={index}>
+                <CardContent>
+                  <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                    <Box sx={{display: "flex", alignItems: "center"}}>
+                      <Avatar src="" alt="" />
+                      <Typography variant="body2" marginX={2}>{cus.sender}</Typography>
+                        {fetchProduct(cus?.productId)?.images && <Avatar variant="square" src={fetchProduct(cus.productId)?.images[0]} alt="" />}
+                    </Box>
+                    <Button onClick={() => handleChat(cus.conversationId, cus.productId )}>Reply</Button>
+                  </Box>
+                </CardContent>
+              </Card>
+            ))}
           </Grid>
         </Grid>
       </ArgonBox>

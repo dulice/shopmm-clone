@@ -21,3 +21,6 @@ GET http://localhost:5000/orders/summary
 
 ### user
 GET http://localhost:5000/orders/user
+
+### message
+GET http://localhost:5000/messages/admin-message

@@ -18,7 +18,10 @@ const Home = () => {
                 const {data}= await axios.get("/auth/login/success", { withCredentials: true});
                 if(!user) return dispatch(register(data.user));
             } catch (err) {
-                toast.error(err.data.message);
+                console.log(err);
+                if(err.data) {
+                    toast.error(err.data.message);
+                }
             }
         }
         getUser();

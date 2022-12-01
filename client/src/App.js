@@ -19,6 +19,7 @@ import Category from './pages/Category';
 import TrackOrder from './pages/TrackOrder';
 import OrderDetail from './pages/OrderDetail';
 import Review from './pages/Review';
+import Chat from './pages/Chat';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path='/order/:id' element={<UserProtected><OrderDetail /></UserProtected>} />
           <Route path='/success' element={<UserProtected><Success /></UserProtected>} />
           <Route path='/review/:id' element={<UserProtected><Review /></UserProtected>} />
+          <Route path='/chat/:id' element={<UserProtected><Chat /></UserProtected>} />
           <Route path="*" element={<Error />} />
         </Routes>
     </Box>

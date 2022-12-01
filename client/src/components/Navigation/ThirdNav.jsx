@@ -54,8 +54,8 @@ const ThirdNav = () => {
         }}
       >
         <span style={{marginBottom: 5}}><CategoriesNav /></span>
-        {navs.map(nav => (
-          <BottomNavigationAction
+        {navs.map((nav, index) => (
+          <BottomNavigationAction key={index}
             label={
               <Link to={nav.link} className="nav-link">
                 <nav.Icon />

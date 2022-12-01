@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Button,
@@ -11,28 +11,58 @@ import {
   Rating,
   Card,
   CardContent,
+  Avatar,
 } from "@mui/material";
+import ChatIcon from '@mui/icons-material/Chat';
 import { useSingleProductQuery } from "../api/productApi";
 import Loading from "../components/Loading";
 import ProductService from "../components/ProductService";
 import ProductImage from "../components/ProductImage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cartProductSlice";
 import Discount from "../components/Discount";
 import QuantityButton from "../components/QuantityButton";
+import { deepOrange } from "@mui/material/colors";
+import { io } from 'socket.io-client';
+
+export const socket = io(process.env.REACT_APP_API_URL);
 
 const Product = () => {
   const { id } = useParams();
+  const { user } = useSelector(state => state.user);
+  const navigate = useNavigate();
   const { data: product, isLoading } = useSingleProductQuery(id);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const [currentRoom, setCurrentRoom] = useState("");
+  const [ownerId, setOwnerId] = useState("");
+
+  useEffect(() => {
+    setOwnerId(product?.ownerId);
+  },[product]);
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, quantity }));
   };
 
+  const orderId = (id1, id2, id3) => {
+    if(id1 > id2) {
+        return id1 + '_' + id2 + '_' + id3;
+    } else {
+        return id2 + '_' + id1 + '_' + id3;
+    }
+}
+
+  const handleChat = () => {
+    if(!user) return navigate('/login');
+    const roomId = orderId(user._id, ownerId, id);
+    navigate(`/chat/${id}`);
+    socket.emit('room', roomId, currentRoom);
+    setCurrentRoom(roomId);
+  }
+
   return (
-    <Container sx={{ minWidth: "1024px", marginY: "2rem" }}>
+    <Container sx={{ minWidth: "1024px", marginY: "2rem", overflowY: "scroll" }}>
       {isLoading ? (
         <Loading />
       ) : (
@@ -94,9 +124,17 @@ const Product = () => {
             </Grid>
           </Grid>
           <Stack spacing={2} mb="2rem">
-            <Typography variant="h6" fontSize="1rem" fontWeight="700">
-              Product details of {product.productName}
-            </Typography>
+            <Box sx={{display: "flex", justifyContent: "space-between"}}>
+              <Typography variant="h6" fontSize="1rem" fontWeight="700">
+                Product details of {product.productName}
+              </Typography>
+              <Typography variant="body2" fontSize="1rem" fontWeight="700">
+                Seller: {product.ownerName}
+              </Typography>
+              <Avatar sx={{ bgcolor: deepOrange[500] }} onClick={handleChat}>
+                <ChatIcon />
+              </Avatar>
+            </Box>
             <ul className="inherit">
               {product.description.split(".").map((des, index) => (
                 <li key={index}>{des}</li>

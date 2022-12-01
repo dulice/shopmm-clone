@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Shopmm Admin Dashboard MUI - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-material-ui
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState, useEffect, useMemo } from "react";
 
 // react-router components
@@ -54,14 +39,42 @@ import brandDark from "assets/images/logo-ct-dark.png";
 // Icon Fonts
 import "assets/css/nucleo-icons.css";
 import "assets/css/nucleo-svg.css";
+import ProductCreate from "layouts/products/ProductCreate";
+import UpdateProduct from "layouts/products/UpdateProduct";
+import SignIn from "layouts/authentication/sign-in";
+import Chat from "layouts/profile/Chat";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "features/userSlice";
+import axios from "axios";
 
 export default function App() {
+  const { user } = useSelector((state) => state.user);
+  const dispatches = useDispatch();
   const [controller, dispatch] = useArgonController();
   const { miniSidenav, direction, layout, openConfigurator, sidenavColor, darkSidenav, darkMode } =
     controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        if(user) {
+          return user;
+        } else {
+          const {data}= await axios.get("/auth/login/success", { withCredentials: true});
+          return dispatches(register(data.user));
+        }
+      } catch (err) {
+        console.log(err);
+        if(err.data) {
+          toast.error(err.data.message);
+        }
+      }
+    }
+    getUser();
+},[]);
 
   // Cache for the rtl
   useMemo(() => {
@@ -183,10 +196,13 @@ export default function App() {
         </>
       )}
       {layout === "vr" && <Configurator />}
-      <Routes>
-        {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
-      </Routes>
+        <Routes>
+          {getRoutes(routes)}
+          <Route path="/add-Product" element={<ProductCreate />} />
+          <Route path="/update-product/:id" element={<UpdateProduct />} />
+          <Route path="/chat/:id" element={<Chat />} />
+          <Route path="*" element={<Navigate to="/dashboard" />} />
+        </Routes>
     </ThemeProvider>
   );
 }

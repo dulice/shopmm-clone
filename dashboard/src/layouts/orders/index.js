@@ -3,17 +3,13 @@ import { Container, Typography, Grid, Card, CardContent, Button, Stack } from "@
 import { useOrdersQuery, useDeliverOrderMutation } from "api/summaryApi";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 const Orders = () => {
   const { data } = useOrdersQuery();
+  const [deliverOrder] = useDeliverOrderMutation();
   const handleDeliver = async (id) => {
     try {
-      // const order = await useDeliverOrderMutation(id, {isDelivered: "delivered"});
-      // console.log(order);
-      await axios.put(`/orders/${id}`, {
-        isDelivered: "delivered",
-      });
+      await deliverOrder({id, isDelivered: "delivered"}).unwrap();
     } catch (err) {
       console.log(err);
       if (err.data) {

@@ -11,8 +11,11 @@ const authRoute = require('./routes/authRoute');
 const imageRoute = require('./routes/imageRoute');
 const productRoute = require('./routes/productRoute');
 const orderRoute = require('./routes/orderRoute');
+const messageRoute = require('./routes/messageRoute');
 const categories = require('./data');
-
+const { createServer } = require('http');
+const { Server } = require('socket.io');
+const Message = require('./models/MessageSchema');
 
 const app = express();
 app.use(cookieSession({
@@ -33,6 +36,13 @@ app.use(cors({
 app.use(express.urlencoded({extended: true}));
 app.use(express.json({limit: "50mb"}));
 
+const http = createServer(app);
+const io = new Server(http, {
+    cors: {
+        origin: '*',
+    }
+})
+
 mongoose.connect(process.env.MONGODB_URL, () => {
     console.log('MongoDB Connected');
 });
@@ -44,8 +54,41 @@ app.use('/auth', authRoute );
 app.use('/upload', imageRoute);
 app.use('/products', productRoute);
 app.use('/orders', orderRoute );
+app.use('/messages', messageRoute);
+
+const conversationMessage = async (conversationId) => {
+    const message = await Message.aggregate([
+        {$match: {conversationId}}
+    ]);
+    return message;
+};
+
+io.on("connection", (socket) => {
+    socket.on('room', async (newRoom, previousRoom) => {
+        socket.join(newRoom);
+        socket.leave(previousRoom);
+        const roomMessages = await conversationMessage(newRoom);
+        socket.emit('room-message', roomMessages);
+    })
+
+    socket.on('new-message', async ({conversationId, productId, sender, receiver, message}) => {
+        const newMessage = new Message({
+            conversationId,
+            productId,
+            sender,
+            receiver,
+            message
+        });
+        await newMessage.save();
+        const roomMessages = await conversationMessage(conversationId);
+        io.to(conversationId).emit('room-message', roomMessages);
+        socket.broadcast.emit('notification', conversationId);
+    })
+})
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 })
+
+http.listen(server);
