@@ -1,0 +1,14 @@
+{
+  "name": "shopmm-clone",
+  "version": "1.0.0",
+  "description": "- frontend\r - backend\r - admin dashboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "build": "cd server && npm i && cd ../client && npm i && npm run build && ../dashboard && npm i && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

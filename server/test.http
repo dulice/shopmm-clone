@@ -10,12 +10,6 @@ GET http://localhost:5000/products/categories/Sandals
 ### search query
 GET http://localhost:5000/products/search?search=air
 
-### get product
-GET http://localhost:5000/products/63534efb80dfcde4f2493ca9
-
-### userOrder
-GET http://localhost:5000/orders/userOrder/635107e8c36d5c3ca44c6485
-
 ### total sale
 GET http://localhost:5000/orders/summary
 

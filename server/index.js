@@ -17,6 +17,7 @@ const { createServer } = require('http');
 const { Server } = require('socket.io');
 const Message = require('./models/MessageSchema');
 const { sendMail } = require('./mail');
+const path = require('path');
 
 const app = express();
 app.use(cookieSession({
@@ -90,6 +91,18 @@ io.on("connection", (socket) => {
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
+})
+
+const __variableOfChoice = path.resolve();
+app.use(express.static(path.join(__variableOfChoice, '/client/build')));
+app.use(express.static(path.join(__variableOfChoice, '/dashboard/build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__variableOfChoice, '/cliend/build/index.html'));
+    res.sendFile(path.join(__variableOfChoice, '/dashboard/build/index.html'));
+});
+
+app.use((err, req, res, next) => {
+    res.status(500).json({message: err.message})
 })
 
 http.listen(server);
