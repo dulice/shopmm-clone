@@ -1,4 +1,4 @@
-const { createApi, fetchBaseQuery } = require("@reduxjs/toolkit/dist/query/react");
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 const productApi = createApi({
     reducerPath: "productApi",

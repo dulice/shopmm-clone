@@ -155,8 +155,8 @@ const createOrder = async (req, res) => {
   try {
     const newOrder = new Order(req.body);
     await newOrder.save();
-    res.send(200).json(newOrder);
-    sendMail();
+    await sendMail(newOrder);
+    res.status(200).json(newOrder);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -164,7 +164,7 @@ const createOrder = async (req, res) => {
 
 const getOrders = async (req, res) => {
   try {
-    const orders = await Order.find();
+    const orders = await Order.find().sort({createdAt: -1});
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -174,7 +174,7 @@ const getOrders = async (req, res) => {
 const customerOrders = async (req, res) => {
   try {
     const customerId = req.params.customerId;
-    const order = await Order.find({ customerId });
+    const order = await Order.find({ customerId }).sort({createdAt: -1});
     res.status(200).json(order);
   } catch (error) {
     res.status(500).json({ message: error.message });

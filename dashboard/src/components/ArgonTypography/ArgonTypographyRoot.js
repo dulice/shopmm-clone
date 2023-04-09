@@ -57,7 +57,7 @@ export default styled(Typography)(({ theme, ownerState }) => {
   return {
     opacity,
     textTransform,
-    verticalAlign,
+    // verticalAlign,
     textDecoration: "none",
     color: colorValue,
     fontWeight: fontWeights[fontWeight] && fontWeights[fontWeight],

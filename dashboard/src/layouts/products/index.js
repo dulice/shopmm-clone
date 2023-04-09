@@ -1,6 +1,5 @@
 // @mui material components
 import Card from "@mui/material/Card";
-import { useGetProductsQuery } from "api/productApi";
 
 // Shopmm Admin Dashboard MUI components
 import ArgonBox from "components/ArgonBox";
@@ -16,29 +15,13 @@ import { Avatar, Button, CircularProgress } from "@mui/material";
 import { Add, Delete, Edit } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useDeleteProductMutation } from "api/productApi";
-import axios from "axios";
-import { useState , useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "features/productSlice";
+import { useGetProductsQuery } from "api/productApi";
 
-const ProductCreate = () => {
+const Products = () => {
   const { data, isLoading } = useGetProductsQuery();
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
   const navigate = useNavigate();
-  const [products, setProducts] = useState([]);
-  
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const { data } = await axios.get('/products');
-        setProducts(data);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    fetchProducts();  
-  },[data]);
-
+console.log(data)
   const productsTableData = {
     columns: [
       { name: "Owner Name", align: "left" },
@@ -50,7 +33,7 @@ const ProductCreate = () => {
       { name: "Control", align: "center" },
     ],
 
-    rows: products?.map((el) => {
+    rows: data?.map((el) => {
       if (isLoading) return <div>Loading...</div>;
       return {
         "Owner Name": (
@@ -123,4 +106,4 @@ const ProductCreate = () => {
   );
 };
 
-export default ProductCreate;
+export default Products;

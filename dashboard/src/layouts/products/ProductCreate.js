@@ -118,12 +118,12 @@ const ProductCreate = () => {
         <form encType="multipart/form-data" onSubmit={handleUploadProduct} style={{fontSize: 16}}>
           <Stack spacing={2}>
             <Box
-              fullWidth
               sx={{
                 height: 50,
                 border: "1px dotted gray",
                 textAlign: "center",
                 padding: 5,
+                width: '100%'
               }}
               {...getRootProps()}
             >
@@ -135,7 +135,6 @@ const ProductCreate = () => {
               </Typography>
             </Box>
             <TextField
-              fullWidth
               label="Product Name"
               value={productName}
               onChange={(e) => setProductName(e.target.value)}

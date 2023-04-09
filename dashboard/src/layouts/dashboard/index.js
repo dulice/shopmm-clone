@@ -93,7 +93,7 @@ function Default() {
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="sales"
-              count={`Ks ${!isLoading && data.orders[0] && data?.orders[0].totalSale}`}
+              count={`Ks ${!isLoading && data.orders[0].toLocaleString() && data?.orders[0].totalSale.toLocaleString()}`}
               icon={{ color: "warning", component: <i className="ni ni-cart" /> }}
             />
           </Grid>

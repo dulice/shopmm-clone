@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 /**
  * The base border styles for the Shopmm Admin Dashboard MUI.
  * You can add new border width, border color or border radius using this file.
- * You can customized the borders value for the entire Shopmm Admin Dashboard MUI using thie file.
+ * You can customized the borders value for the entire  MUI using thie file.
  */
 
 // Shopmm Admin Dashboard MUI Base Styles

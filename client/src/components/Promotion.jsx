@@ -1,16 +1,18 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Sale from '../assets/image/sale.jpg'
+import ShopBag from '../assets/image/shop-bag.jpg'
 
 const promotions = [
   {
-    name: "wavepay",
-    image: "https://icms-image.slatic.net/images/ims-web/f112ead1-8849-4002-b795-703aab08ebcf.jpg",
+    name: "sale",
+    image: Sale,
     link: "https://pages.shop.com.mm/wow/gcp/daraz/channel/mm/education-2022/wavepay-shop-8th-anniversary?spm=a2a0e.home.top.dbr4.b3a47fe4keoDjY&scm=1003.4.icms-zebra-100031612-2974964.OTHER_6502046062_7670037",
   },
   {
-    name: "electronic",
-    image: "https://icms-image.slatic.net/images/ims-web/edb9a8e9-754d-482f-a5fa-ca329ee3458d.jpg",
+    name: "shop-bag",
+    image: ShopBag,
     link: "https://pages.shop.com.mm/wow/gcp/daraz/daily/mm/electronic-zone-june-nov-22/computers-and-accessories?spm=a2a0e.home.top.dbr2.b3a47fe4keoDjY&scm=1003.4.icms-zebra-100031612-2974964.OTHER_6502046060_7670037",
   },
   {
@@ -37,7 +39,7 @@ const Promotion = () => {
       <Carousel autoPlay={true} infiniteLoop={true} showArrows={false}>
         {promotions.map((promo, index) => (
           <a key={index} href={promo.link}>
-                <img src={promo.image} alt="" />
+                <img src={promo.image} alt={promo.name} />
           </a>
         ))}
       </Carousel>

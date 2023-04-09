@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Grid,
@@ -8,15 +7,17 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../../features/userSlice';
+import { firstNavItems } from "../../data";
 
-const FirstNav = () => {
+const FirstNav = (props) => {
   const { user } = useSelector((state) => state.user);
+  const { active, selected, onSelect } = props;
+
   const dispatch = useDispatch();
   return (
     <Box>
-      <Grid container>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={8}>
+      <Grid container justifyContent="flex-end">
+        <Grid item>
           <BottomNavigation
             showLabels
             sx={{
@@ -24,52 +25,33 @@ const FirstNav = () => {
               fontSize: "12px",
               height: 0,
               display: "inline-block",
-              textTransform: "uppercase",
             }}
           >
-            <BottomNavigationAction
-              value="save more on app"
-              label={
-                <Link to="/save-more-on-app" className="nav-link uppercase">
-                  save more on app
-                </Link>
-              }
-            />
-            <BottomNavigationAction
-              value="sell on app"
-              label={
-                <Link className="nav-link uppercase" to="/sell-on-app">
-                  sell on app
-                </Link>
-              }
-            />
-            <BottomNavigationAction
-              value="customer care"
-              label={
-                <Link className="nav-link uppercase" to="/customer-care">
-                  customer care
-                </Link>
-              }
-            />
-            <BottomNavigationAction
-              value="track my order"
-              label={
-                <Link className="nav-link uppercase" to="/track-order">
-                  track my order
-                </Link>
-              }
-            />
+            {firstNavItems.map((item) => (
+                <BottomNavigationAction
+                  onClick={() => onSelect(item.id)}               
+                  key={item.id}
+                  value={item.title}
+                  label={
+                    <Link to={item.link} className="nav-link uppercase" style={selected === item.id ? active : undefined}>
+                      {item.title}
+                    </Link>
+                  }
+                />
+            ))}
             <BottomNavigationAction
               value="login"
               label={
                 user ? (
-                  <Link className="nav-link uppercase" to="/login" onClick={() => dispatch(logout())}>
+                  <Link className="nav-link uppercase" to="/logout" onClick={() => dispatch(logout())}>
                     Logout
                   </Link>
                 ) : (
-                  <Link className="nav-link uppercase" to="/login">
-                    login
-                  </Link>
+                  <>
+                    <Link className="nav-link uppercase" to="/login">
+                      login
+                    </Link>
+                  </>
                 )
               }
             />

@@ -29,7 +29,7 @@ import "react-toastify/dist/ReactToastify.css";
 // react-perfect-scrollbar styles
 import "react-perfect-scrollbar/dist/css/styles.css";
 import { Provider } from "react-redux";
-import store from 'features/store';
+import store from 'features/Store';
 import { ToastContainer } from "react-toastify";
 
 const container = document.getElementById("root");

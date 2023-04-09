@@ -146,7 +146,10 @@ const Product = () => {
               <Card key={review._id}>
                 <CardContent>
                   <Stack spacing={2}>
-                    <Typography variant="body2" color="gray">{review.reviewerName}</Typography>
+                    <Box sx={{display: "flex", alignItems: "center", gap: 1}}>
+                      <Avatar img="" alt="" />
+                      <Typography variant="body2" color="gray">{review.reviewerName}</Typography>
+                    </Box>
                     <Rating value={review.rating} readOnly/>
                     <Typography variant="body2">{review.comment}</Typography>
                   </Stack>

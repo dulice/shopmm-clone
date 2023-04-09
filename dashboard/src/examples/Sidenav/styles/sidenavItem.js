@@ -77,7 +77,7 @@ function itemIconBox(theme, ownerState) {
     minHeight: pxToRem(32),
     borderRadius: borderRadius.md,
     display: "grid",
-    placeItems: "center",
+    alignItems: "center",
     transition: transitions.create("margin", {
       easing: transitions.easing.easeInOut,
       duration: transitions.duration.standard,

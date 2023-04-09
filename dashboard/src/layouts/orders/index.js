@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography, Grid, Card, CardContent, Button, Stack } from "@mui/material";
+import { Container, Typography, Grid, Card, CardContent, Button, Stack, CardHeader } from "@mui/material";
 import { useOrdersQuery, useDeliverOrderMutation } from "api/summaryApi";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import { toast } from "react-toastify";
@@ -17,6 +17,7 @@ const Orders = () => {
       }
     }
   };
+
   return (
     <DashboardLayout>
       <Container>
@@ -27,6 +28,7 @@ const Orders = () => {
           {data?.map((order) => (
             <Card key={order._id}>
               <CardContent>
+                <Typography sx={{fontSize: '14px'}} color="text.secondary">{order.createdAt.substring(0, 10)}</Typography>
                 <Grid container spacing={3}>
                   {order.items.map((item, index) => (
                     <Grid item xs={8} key={index}>

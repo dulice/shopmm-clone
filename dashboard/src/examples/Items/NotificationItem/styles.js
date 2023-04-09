@@ -37,7 +37,7 @@ function menuImage(theme, ownerState) {
 
   return {
     display: "grid",
-    placeItems: "center",
+    alignItems: "center",
     backgroundImage: gradients[color]
       ? linearGradient(gradients[color].main, gradients[color].state)
       : linearGradient(gradients.dark.main, gradients.dark.state),

@@ -8,31 +8,29 @@ const orderEmailTemplate = (order) => {
         alt=""
         />
         <h5>Your Package has been shipped!</h5>
-        <p>Hi ${order.address.fullName},</p>
-        <br />
+        <h3>Hi ${order.address.fullName},</h3>
         <p>
         We are pleased to share that the item(s) from your order ${order._id} have
         been shipped.
         </p>
         <br />
         <p><b>DELIVERY DETAILS</b></p>
-        <br />
         <table>
             <tbody>
                 <tr>
                     <td>Name</td>
-                    <td>${order.address.fullName}</td>
+                    <td>: ${order.address.fullName}</td>
                 </tr>
                 <tr>
                     <td>Address</td>
                     <td>
-                        ${order.address.address}, ${order.address.city},
+                        : ${order.address.address}, ${order.address.city},
                         ${order.address.state}
                     </td>
                 </tr>
                 <tr>
                     <td>Phone</td>
-                    <td>${order.phoneNumber}</td>
+                    <td>: ${order.address.phoneNumber}</td>
                 </tr>
             </tbody>
         </table>
@@ -44,11 +42,11 @@ const orderEmailTemplate = (order) => {
                 ${order.items.map(item => 
                     `
                         <tr>
-                            <td>${order.items.images[0]}</td>
-                            <td>
+                            <td width="30%"><img src=${item.images[0]} alt="" width="100%"/></td>
+                            <td width="70%">
                                 <p color="orange">${item.productName}</p>
-                                <p color="orange">Ks ${item.price}</p>
-                                <p>Quantity ${item.quantity}</p>
+                                <p color="orange">Ks <b>${item.price}</b></p>
+                                <p>Quantity : ${item.quantity}</p>
                             </td>
                         </tr>  
                     `
@@ -59,16 +57,16 @@ const orderEmailTemplate = (order) => {
         <table>
             <tbody>
                 <tr>
-                    <td>Subtotal</td>
-                    <td>Ks ${order.productsPrice}</td>
+                    <td style="font: 20px bold;">Subtotal</td>
+                    <td style="font: 20px bold;">:  Ks ${order.productsPrice}</td>
                 </tr>
                 <tr>
-                    <td>Shipping fess</td>
-                    <td>Ks ${order.shippingFees}</td>
+                    <td style="font: 20px bold;">Shipping fess</td>
+                    <td style="font: 20px bold;">:  Ks ${order.shippingFees}</td>
                 </tr>
                 <tr>
-                    <td color="orange">Total (GST Incl) </td>
-                    <td>${order.totalPrice}</td>
+                    <td style="font: 20px bold; color: orange;">Total (GST Incl) </td>
+                    <td style="font: 20px bold; color: orange;">:  Ks ${order.totalPrice}</td>
                 </tr>
             </tbody>
         </table>
@@ -76,32 +74,23 @@ const orderEmailTemplate = (order) => {
     `;
 };
 
-async function sendMail() {
-    let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
+async function sendMail(order) {
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
         auth: {
-          type: "OAuth2",
           user: process.env.AUTH_EMAIL,
-          clientId: process.env.GOOGLE_CLIENT_ID,
-          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-          expires: 1484314697598,
+          pass: process.env.AUTH_PASS,
         },
-      });
+        tls: {
+          rejectUnauthorized: false,
+        },
+    });
 
   let info = {
-    from: process.env.AUTH_EMAIL, // sender address
-    to: "mywenoon@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: `<h1>Products</h1>`, // html body
-    auth: {
-        user: process.env.AUTH_EMAIL,
-        refreshToken: "1/XXxXxsss-xxxXXXXXxXxx0XXXxxXXx0x00xxx",
-        accessToken: "ya29.Xx_XX0xxxxx-xX0X0XxXXxXxXXXxX0x",
-        expires: 1484314697598,
-    }
+    from: "shopmmclone@dev.com", // sender address
+    to: order.address.email, // list of receivers
+    subject: "Your order products", // Subject line
+    html: orderEmailTemplate(order), // html body
 }
 
   // send mail with defined transport object
@@ -114,4 +103,4 @@ async function sendMail() {
   });
 }
 
-module.exports = sendMail();
+module.exports = {sendMail};

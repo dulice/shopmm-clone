@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./userSlice";
-import userApi from "../api/userApi";
 import thunk from "redux-thunk";
-import productApi from "../api/productApi";
+import userSlice from "./userSlice";
 import cartProductSlice from "./cartProductSlice";
+import userApi from "../api/userApi";
+import productApi from "../api/productApi";
 import orderApi from "../api/orderApi";
 
 const store = configureStore({
@@ -14,7 +14,8 @@ const store = configureStore({
         [productApi.reducerPath]: productApi.reducer,
         [orderApi.reducerPath]: orderApi.reducer,
     },
-    middleware: [thunk]
+    middleware: (getDefaultMiddleware) => 
+        getDefaultMiddleware().concat(thunk, userApi.middleware, productApi.middleware, orderApi.middleware),    
 })
 
 export default store;

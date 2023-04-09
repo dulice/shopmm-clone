@@ -4,7 +4,7 @@ import { useSlugProductQuery } from "../api/productApi";
 import ProductCard from "../components/ProductCard";
 import Loading from "../components/Loading";
 import { useParams } from "react-router-dom";
-import Error from "./Error";
+import Home from "./Home";
 
 const Category = () => {
   const { slug } = useParams();
@@ -16,7 +16,7 @@ const Category = () => {
           {isLoading ? (
             <Loading />
           ) : data?.length <= 0 ? (
-            <Error />
+            <Home />
           ) : (
             data?.map((product) => (
               <ProductCard key={product._id} product={product} />

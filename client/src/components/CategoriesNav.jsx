@@ -7,6 +7,7 @@ import {
 } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import { categoriesData } from '../data';
+
 const CategoriesNav = () => {
   return (
     <Menu arrow={true} menuButton={<MenuButton>Categories</MenuButton>}>

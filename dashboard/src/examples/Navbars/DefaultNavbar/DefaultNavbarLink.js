@@ -40,7 +40,7 @@ function DefaultNavbarLink({ icon, name, route, light }) {
       <Icon
         sx={{
           color: ({ palette: { white, secondary } }) => (light ? white.main : secondary.main),
-          verticalAlign: "middle",
+          // verticalAlign: "middle",
         }}
       >
         {icon}

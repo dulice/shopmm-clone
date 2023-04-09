@@ -7,7 +7,8 @@ import StepState from "../components/StepState";
 import { toast } from "react-toastify";
 
 const ShippingAddress = () => {
-    const { address: shippingAdd } = useSelector(state => state.cartItems);
+  const { address: shippingAdd } = useSelector(state => state.cartItems);
+  const { user } = useSelector(state => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [fullName, setFullName] = useState(shippingAdd.fullName || "");
@@ -37,6 +38,7 @@ const ShippingAddress = () => {
           city,
           township,
           phoneNumber,
+          email: user.email,
         })
       );
       navigate("/checkout");

@@ -1,21 +1,6 @@
 {
-  "name": "argon-dashboard-mui",
-  "version": "3.0.0",
-  "author": "Creative Tim",
-  "license": "SEE LICENSE IN <https://www.creative-tim.com/license>",
-  "description": "React version of Shopmm Admin Dashboard by Creative Tim",
-  "homepage": "https://demos.creative-tim.com/argon-dashboard-material-ui/",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/argon-dashboard-material-ui/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/creativetimofficial/argon-dashboard-material-ui.git"
-  },
-  "engines": {
-    "node": "14 || 15 || 16",
-    "npm": ">=6"
-  },
+  "name": "client",
+  "version": "0.1.0",
   "proxy": "http://localhost:5000",
   "dependencies": {
     "@emotion/cache": "11.7.1",

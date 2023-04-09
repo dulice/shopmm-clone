@@ -26,7 +26,7 @@ import { useArgonController } from "context";
 
 const ArgonTypography = forwardRef(
   (
-    { color, fontWeight, textTransform, verticalAlign, textGradient, opacity, children, ...rest },
+    { color, fontWeight, textTransform, textGradient, opacity, children, ...rest },
     ref
   ) => {
     const [controller] = useArgonController();
@@ -39,7 +39,7 @@ const ArgonTypography = forwardRef(
         ownerState={{
           color,
           textTransform,
-          verticalAlign,
+          // verticalAlign,
           fontWeight,
           opacity,
           textGradient,
@@ -57,7 +57,7 @@ ArgonTypography.defaultProps = {
   color: "dark",
   fontWeight: false,
   textTransform: "none",
-  verticalAlign: "unset",
+  // verticalAlign: "unset",
   textGradient: false,
   opacity: 1,
 };
@@ -79,17 +79,17 @@ ArgonTypography.propTypes = {
   ]),
   fontWeight: PropTypes.oneOf([false, "light", "regular", "medium", "bold"]),
   textTransform: PropTypes.oneOf(["none", "capitalize", "uppercase", "lowercase"]),
-  verticalAlign: PropTypes.oneOf([
-    "unset",
-    "baseline",
-    "sub",
-    "super",
-    "text-top",
-    "text-bottom",
-    "middle",
-    "top",
-    "bottom",
-  ]),
+  // verticalAlign: PropTypes.oneOf([
+  //   "unset",
+  //   "baseline",
+  //   "sub",
+  //   "super",
+  //   "text-top",
+  //   "text-bottom",
+  //   "middle",
+  //   "top",
+  //   "bottom",
+  // ]),
   textGradient: PropTypes.bool,
   children: PropTypes.node.isRequired,
   opacity: PropTypes.number,

@@ -4,44 +4,13 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
-import MilitaryTechOutlinedIcon from "@mui/icons-material/MilitaryTechOutlined";
-import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckoutOutlined";
-import ReceiptOutlined from "@mui/icons-material/ReceiptOutlined";
-import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
-import PercentOutlinedIcon from "@mui/icons-material/PercentOutlined";
 import CategoriesNav from "../CategoriesNav";
+import { Link } from "react-router-dom";
+import { thirdNavItems } from "../../data";
 
-const navs = [{
-  id: 1,
-  link: "/official-store",
-  Icon: MilitaryTechOutlinedIcon,
-  title: "Official Store"
-},
-{
-  id: 2,
-  link: "/shop-mart",
-  Icon: ShoppingCartCheckoutOutlinedIcon,
-  title: "Shop Mart"
-},{
-  id: 3,
-  link: "/sale",
-  Icon: ReceiptOutlined,
-  title: "El Sale"
-},{
-  id: 4,
-  link: "/shop-travel",
-  Icon: LocalShippingOutlinedIcon,
-  title: "Shop Travel"
-},{
-  id: 5,
-  link: "/new-arrival",
-  Icon: PercentOutlinedIcon,
-  title: "New Arrival"
-},
-]
-
-const ThirdNav = () => {
+const ThirdNav = (props) => {
+  const { active, selected, onSelect } = props;
+  
   return (
     <>
       <BottomNavigation
@@ -54,10 +23,11 @@ const ThirdNav = () => {
         }}
       >
         <span style={{marginBottom: 5}}><CategoriesNav /></span>
-        {navs.map((nav, index) => (
-          <BottomNavigationAction key={index}
+        {thirdNavItems.map((nav) => (
+          <BottomNavigationAction key={nav.id}
+            onClick={() => onSelect(nav.id)}
             label={
-              <Link to={nav.link} className="nav-link">
+              <Link to={nav.link} className="nav-link" style={selected === nav.id ? active : undefined}>
                 <nav.Icon />
                 <Typography variant="caption">{nav.title}</Typography>
               </Link>

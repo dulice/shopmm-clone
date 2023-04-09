@@ -1,41 +1,6 @@
-import { Article, FindReplace, Home, LocalShipping, LockOpen, ManageAccounts, Payment, RemoveShoppingCart } from '@mui/icons-material'
 import { CardContent, Container, Card, Grid, Typography } from '@mui/material'
 import React from 'react'
-
-const serviceTools = [
-    {
-        label: "Track Order",
-        icon: LocalShipping
-    },
-    {
-        label: "Reset Password",
-        icon: LockOpen
-    },
-    {
-        label: "My Payment Options",
-        icon: Payment
-    },
-    {
-        label: "Vouchers",
-        icon: Article,
-    },
-    {
-        label: "Edit Account Details",
-        icon: ManageAccounts
-    },
-    {
-        label: "My Cancellation",
-        icon: RemoveShoppingCart
-    },
-    {
-        label: "My Returns",
-        icon: FindReplace
-    },
-    { 
-        label: "Address Book",
-        icon: Home
-    }
-]
+import { serviceTools } from '../data'
 
 const CustomerCare = () => {
   return (
@@ -45,7 +10,7 @@ const CustomerCare = () => {
             <Grid container spacing={3}>
                 {serviceTools.map((tool) => {
                     return (
-                        <Grid item xs={3}>
+                        <Grid item xs={3} key={tool.id}>
                             <Card>
                                 <CardContent sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                                     <tool.icon sx={{color: "#F26924"}}/>
