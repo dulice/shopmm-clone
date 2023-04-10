@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 
+const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+const price = JSON.parse(localStorage.getItem('productsPrice'));
+const sumPrice = JSON.parse(localStorage.getItem('totalPrice'));
+const userAddress = JSON.parse(localStorage.getItem('address')) || {};
+
 export const discountAmount = (price, discount) => {
     let result = price - (price * discount) / 100;
     if(discount > 0 ) {
@@ -32,11 +37,11 @@ const priceDetail = (state) => {
 const cartProductSlice = createSlice({
     name: "cartItems",
     initialState: {
-        items: JSON.parse(localStorage.getItem('cartItems')) || [],
-        productsPrice: JSON.parse(localStorage.getItem('productsPrice')) || 0,
+        items: cartItems ? cartItems : [],
+        productsPrice: price ? price : 0,
         shippingFees: 2990,
-        totalPrice: JSON.parse(localStorage.getItem('totalPrice')) || 0,
-        address: JSON.parse(localStorage.getItem('address')) || {},
+        totalPrice: sumPrice ? sumPrice : 0,
+        address: userAddress ? userAddress : {},
     },
     reducers: {
         addToCart: (state, action) => {

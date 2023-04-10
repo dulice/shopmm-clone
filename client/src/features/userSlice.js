@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import userApi from '../api/userApi';
 
+const currentUser = JSON.parse(localStorage.getItem('user'));
 const userSlice = createSlice({
     name: 'User',
     initialState: {
-        user: JSON.parse(localStorage.getItem('user')) || null,
+        user:  currentUser? currentUser : null,
     },
     reducers: {
         register: (state, action) => {
