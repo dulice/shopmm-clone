@@ -72,7 +72,7 @@ const ProductCreate = () => {
 
     e.preventDefault();
     try {
-      const { data } = await axios.post("/upload/product", { images });
+      const { data } = await axios.post("https://shopmm-clone-api.onrender.com/upload/product", { images });
       data.forEach((item) => {
         resultImages.push(item.secure_url);
       });

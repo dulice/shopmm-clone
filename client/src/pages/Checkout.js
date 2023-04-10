@@ -29,14 +29,14 @@ const Checkout = () => {
 
   const handleCheckout = async () => {
     try {
-      const { data } = await axios.post("/orders/checkout", {
+      const { data } = await axios.post("https://shopmm-clone-api.onrender.com/orders/checkout", {
         items,
         userId: user._id,
       });
       window.location.href = data.url;
       if(data.url) {
         try {
-          await axios.post('/orders', {
+          await axios.post('https://shopmm-clone-api.onrender.com/orders', {
             customerId: user._id,
             items,
             productsPrice,

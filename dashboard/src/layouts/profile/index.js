@@ -53,7 +53,7 @@ function Overview() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const { data } = await axios.get(`/messages/admin-message?receiver=${user.username}`);
+        const { data } = await axios.get(`https://shopmm-clone-api.onrender.com/messages/admin-message?receiver=${user.username}`);
         const chatData = [...new Map(data?.map((item) => [item.conversationId, item])).values()];
         setCustomers(chatData);
       } catch (err) {

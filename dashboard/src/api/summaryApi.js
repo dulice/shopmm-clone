@@ -1,7 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+const baseUrl = process.env.REACT_APP_API_URL + '/orders';
 const summaryApi = createApi({
     reducerPath: "summaryApi",
-    baseQuery: fetchBaseQuery({baseUrl: "/orders"}),
+    baseQuery: fetchBaseQuery({baseUrl }),
     endpoints: (builder) => ({
         orders: builder.query({
             query: () => ({
