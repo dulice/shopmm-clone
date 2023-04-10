@@ -43,7 +43,7 @@ const FirstNav = (props) => {
               value="login"
               label={
                 user ? (
-                  <Link className="nav-link uppercase" to="/logout" onClick={() => dispatch(logout())}>
+                  <Link className="nav-link uppercase" to="/login" onClick={() => dispatch(logout())}>
                     Logout
                   </Link>
                 ) : (

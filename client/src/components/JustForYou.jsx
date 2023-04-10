@@ -4,32 +4,19 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import Loading from "./Loading";
 import { randomProduct } from "../features/cartProductSlice";
+import { useProductsQuery } from "../api/productApi";
 
 const JustForYou = () => {
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-
+  const { data, isLoading } = useProductsQuery(30);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setIsLoading(true);
-      try {
-        const { data } = await axios.get("/products");
-        setProducts(randomProduct(data, 18));
-        setIsLoading(false);
-      } catch (err) {
-        console.log(err.response.data.message);
-        setIsLoading(false);
-      }
-    };
-    fetchProducts();
-  }, []);
+    data && setProducts(randomProduct(data, 18));
+  }, [data]);
 
   return (
     <Box paddingY={2} minWidth={1024}>

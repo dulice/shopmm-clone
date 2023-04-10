@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 const cartItems = JSON.parse(localStorage.getItem('cartItems'));
 const price = JSON.parse(localStorage.getItem('productsPrice'));
 const sumPrice = JSON.parse(localStorage.getItem('totalPrice'));
-const userAddress = JSON.parse(localStorage.getItem('address')) || {};
+const userAddress = JSON.parse(localStorage.getItem('address'));
 
 export const discountAmount = (price, discount) => {
     let result = price - (price * discount) / 100;
@@ -16,7 +16,7 @@ export const discountAmount = (price, discount) => {
   };
 
   export const randomProduct = (arr, num) => {
-    const randomArr = arr.sort(() => 0.5 - Math.random());
+    const randomArr = [...arr].sort(() => 0.5 - Math.random());
     return randomArr.slice(arr, num);
   };
 

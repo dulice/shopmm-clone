@@ -16,7 +16,6 @@ const categories = require('./data');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const Message = require('./models/MessageSchema');
-const { sendMail } = require('./mail');
 const path = require('path');
 
 const app = express();

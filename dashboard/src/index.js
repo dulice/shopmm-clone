@@ -31,9 +31,12 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 import { Provider } from "react-redux";
 import store from 'features/Store';
 import { ToastContainer } from "react-toastify";
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
+
+if(process.env.NODE_ENV === 'production') disableReactDevTools();
 
 root.render(
   <Provider store={store} >

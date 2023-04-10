@@ -60,7 +60,7 @@ const Login = () => {
       dispatch(register(data));
       navigate("/");
     } catch (err) {
-      toast.error(err.data.message);
+      toast.error(err.status);
     }
   };
 

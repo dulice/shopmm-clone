@@ -20,7 +20,7 @@ const Home = () => {
             } catch (err) {
                 console.log(err);
                 if(err.data) {
-                    toast.error(err.data.message);
+                    toast.error(err.status);
                 }
             }
         }

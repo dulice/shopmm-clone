@@ -92,8 +92,7 @@ function Illustration() {
       dispatch(register(data));
       navigate("/");
     } catch (err) {
-      console.log(err);
-      toast.error(err.data.message);
+      toast.error(err.status);
     }
   };
 

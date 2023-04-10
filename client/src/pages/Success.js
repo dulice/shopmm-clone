@@ -16,7 +16,7 @@ const Success = () => {
     }, 1000);
     counter === 0 && navigate('/');
     return () => clearInterval(redirect);
-  },[counter]);
+  },[counter, dispatch, navigate]);
   return (
     <Box sx={{width: 350, margin: "3rem auto", lineHeight: "2rem"}}>
         <CheckCircle style={{color: "green", fontSize: "5rem"}}/>

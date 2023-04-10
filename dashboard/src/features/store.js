@@ -14,8 +14,8 @@ const store = configureStore({
         [summaryApi.reducerPath]: summaryApi.reducer,
         [productApi.reducerPath]: productApi.reducer,
     },
-    middleware: [thunk, userApi.middleware, summaryApi.middleware, productApi.middleware]
-    
+    middleware: [thunk, userApi.middleware, summaryApi.middleware, productApi.middleware],
+    devTools: false,
 })
 
 export default store;
