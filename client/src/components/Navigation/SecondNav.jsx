@@ -58,11 +58,10 @@ export default function SecondNav() {
     navigate(`/search?search=${search}`);
   }
   return (
-    <Box sx={{ flexGrow: 1 }}>
       <>
-        <Toolbar>
+        <Toolbar sx={{justifyContent: "space-between"}}>
           <Link to="/">
-          <img src={Logo} alt='' style={{height: "40px"}}/>
+            <img src={Logo} alt='' style={{height: "40px"}}/>
           </Link>
           <form  onSubmit={handleSubmit}>
               <Search>
@@ -77,9 +76,8 @@ export default function SecondNav() {
                 />
               </Search>
           </form>
-          <Box sx={{ flexGrow: 1 }} />
           <Link to="/cartProducts" className='inherit'>
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Box>
               <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                 <Badge badgeContent={items.length} color="error">
                   <LocalGroceryStoreOutlinedIcon />
@@ -89,6 +87,5 @@ export default function SecondNav() {
           </Link>
         </Toolbar>
       </>
-    </Box>
   );
 }

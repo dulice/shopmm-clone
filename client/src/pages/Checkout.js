@@ -15,44 +15,29 @@ import {
   Stack,
 } from "@mui/material";
 import axios from "axios";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Discount from "../components/Discount";
 import StepState from "../components/StepState";
-import { resetItems } from '../features/cartProductSlice';
 
 const Checkout = () => {
   const { address, items, productsPrice, shippingFees, totalPrice } =
     useSelector((state) => state.cartItems);
   const { user } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
+  useEffect(() => {
+    localStorage.removeItem('url');
+  },[])
+  
   const handleCheckout = async () => {
     try {
-      const { data } = await axios.post("https://shopmm-clone-api.onrender.com/orders/checkout", {
+      const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/orders/checkout` , {
         items,
         userId: user._id,
+        email: user.email
       });
       window.location.href = data.url;
-      if(data.url) {
-        try {
-          await axios.post('https://shopmm-clone-api.onrender.com/orders', {
-            customerId: user._id,
-            items,
-            productsPrice,
-            shippingFees,
-            totalPrice,
-            address,
-            isPaid: true,
-          })
-          dispatch(resetItems());
-        } catch (err) {
-          if(err.response) {
-            console.log(err.response.data.message);
-          }
-          console.log(err);
-        }
-      }
+      localStorage.setItem('url', data.url);
     } catch (err) {
       console.log(err.message);
     }
@@ -122,13 +107,13 @@ const Checkout = () => {
               </Grid>
             ))}
           </>
-          <Typography variant="body2" align="end">
+          <Typography variant="body2" align="right">
             Subtotal:{" "}
             <span style={{ color: "#F26924", fontWeight: 700 }}>
               Ks {productsPrice}
             </span>
           </Typography>
-          <Typography variant="body2" align="end">
+          <Typography variant="body2" align="right">
             Delivery Fees:{" "}
             <span style={{ color: "#F26924", fontWeight: 700 }}>
               Ks {shippingFees}

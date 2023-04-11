@@ -1,20 +1,51 @@
 import { CheckCircle } from '@mui/icons-material'
 import { Box, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetItems } from '../features/cartProductSlice';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Success = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [counter, setCounter] = useState(5);
+  const url = localStorage.getItem('url');
+
+  const { address, items, productsPrice, shippingFees, totalPrice } =
+    useSelector((state) => state.cartItems);
+  const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    const createOrder = async () => {
+        try {
+          await axios.post(`${process.env.REACT_APP_API_URL}/orders`, {
+            customerId: user._id,
+            items,
+            productsPrice,
+            shippingFees,
+            totalPrice,
+            address,
+            isPaid: true,
+          })
+          dispatch(resetItems());
+        } catch (err) {
+          if(err.response) {
+            console.log(err.response.data.message);
+          }
+          console.log(err);
+        }
+      }
+    url && createOrder();
+  },[])
+  
   useEffect(() => {
     dispatch(resetItems());
     const redirect = counter>0 && setInterval(() => {
       setCounter(counter-1);
     }, 1000);
     counter === 0 && navigate('/');
+    localStorage.removeItem('url');
     return () => clearInterval(redirect);
   },[counter, dispatch, navigate]);
   return (

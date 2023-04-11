@@ -63,7 +63,7 @@ export default function App() {
         if(user) {
           return user;
         } else {
-          const {data}= await axios.get("/auth/login/success", { withCredentials: true});
+          const {data}= await axios.get(`${process.env.REACT_APP_API_URL}/auth/login/success`, { withCredentials: true});
           return dispatches(register(data.user));
         }
       } catch (err) {

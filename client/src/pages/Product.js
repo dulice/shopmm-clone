@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Button,
@@ -13,7 +13,7 @@ import {
   CardContent,
   Avatar,
 } from "@mui/material";
-import ChatIcon from '@mui/icons-material/Chat';
+import ChatIcon from "@mui/icons-material/Chat";
 import { useSingleProductQuery } from "../api/productApi";
 import Loading from "../components/Loading";
 import ProductService from "../components/ProductService";
@@ -23,13 +23,13 @@ import { addToCart } from "../features/cartProductSlice";
 import Discount from "../components/Discount";
 import QuantityButton from "../components/QuantityButton";
 import { deepOrange } from "@mui/material/colors";
-import { io } from 'socket.io-client';
+import { io } from "socket.io-client";
 
 export const socket = io(process.env.REACT_APP_API_URL);
 
 const Product = () => {
   const { id } = useParams();
-  const { user } = useSelector(state => state.user);
+  const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const { data: product, isLoading } = useSingleProductQuery(id);
   const [quantity, setQuantity] = useState(1);
@@ -39,30 +39,32 @@ const Product = () => {
 
   useEffect(() => {
     setOwnerId(product?.ownerId);
-  },[product]);
+  }, [product]);
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, quantity }));
   };
 
   const orderId = (id1, id2, id3) => {
-    if(id1 > id2) {
-        return id1 + '_' + id2 + '_' + id3;
+    if (id1 > id2) {
+      return id1 + "_" + id2 + "_" + id3;
     } else {
-        return id2 + '_' + id1 + '_' + id3;
+      return id2 + "_" + id1 + "_" + id3;
     }
-}
+  };
 
   const handleChat = () => {
-    if(!user) return navigate('/login');
+    if (!user) return navigate("/login");
     const roomId = orderId(user._id, ownerId, id);
     navigate(`/chat/${id}`);
-    socket.emit('room', roomId, currentRoom);
+    socket.emit("room", roomId, currentRoom);
     setCurrentRoom(roomId);
-  }
+  };
 
   return (
-    <Container sx={{ minWidth: "1024px", marginY: "2rem", overflowY: "scroll" }}>
+    <Container
+      sx={{ minWidth: "1024px", marginY: "2rem", overflowY: "scroll" }}
+    >
       {isLoading ? (
         <Loading />
       ) : (
@@ -108,7 +110,9 @@ const Product = () => {
                   only {product.stock} items left.
                 </Alert>
                 <Stack direction="row" spacing={2}>
-                  <Button variant="contained">Buy Now</Button>
+                  <Button variant="contained" onClick={handleAddToCart}>
+                    <Link to="/cartProducts" className="inherit">Buy Now</Link>
+                  </Button>
                   <Button
                     variant="contained"
                     color="success"
@@ -124,7 +128,7 @@ const Product = () => {
             </Grid>
           </Grid>
           <Stack spacing={2} mb="2rem">
-            <Box sx={{display: "flex", justifyContent: "space-between"}}>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h6" fontSize="1rem" fontWeight="700">
                 Product details of {product.productName}
               </Typography>
@@ -142,15 +146,17 @@ const Product = () => {
             </ul>
           </Stack>
           <Box>
-            {product.reviews.map(review => (
+            {product.reviews.map((review) => (
               <Card key={review._id}>
                 <CardContent>
                   <Stack spacing={2}>
-                    <Box sx={{display: "flex", alignItems: "center", gap: 1}}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                       <Avatar img="" alt="" />
-                      <Typography variant="body2" color="gray">{review.reviewerName}</Typography>
+                      <Typography variant="body2" color="gray">
+                        {review.reviewerName}
+                      </Typography>
                     </Box>
-                    <Rating value={review.rating} readOnly/>
+                    <Rating value={review.rating} readOnly />
                     <Typography variant="body2">{review.comment}</Typography>
                   </Stack>
                 </CardContent>

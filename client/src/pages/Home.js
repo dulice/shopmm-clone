@@ -15,7 +15,7 @@ const Home = () => {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const {data}= await axios.get("/auth/login/success", { withCredentials: true});
+                const {data}= await axios.get(`${process.env.REACT_APP_API_URL}/auth/login/success`, { withCredentials: true});
                 if(!user) return dispatch(register(data.user));
             } catch (err) {
                 console.log(err);

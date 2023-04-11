@@ -85,7 +85,6 @@ const cartProductSlice = createSlice({
             localStorage.removeItem('cartItems');
             localStorage.removeItem('productsPrice');
             localStorage.removeItem('totalPrice');
-            localStorage.removeItem('address');
         }
     }
 })
