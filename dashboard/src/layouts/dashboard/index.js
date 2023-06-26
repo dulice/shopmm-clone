@@ -79,21 +79,21 @@ function Default() {
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="total products"
-              count={!isLoading && data.totalProducts[0] && data?.totalProducts[0].numberOfProducts}
+              count={!isLoading && data?.totalProducts[0] && data?.totalProducts[0].numberOfProducts}
               icon={{ color: "error", component: <i className="ni ni-world" /> }}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="total users"
-              count={!isLoading && data.users[0] && data?.users[0].numberOfUsers}
+              count={!isLoading && data?.users[0] && data?.users[0].numberOfUsers}
               icon={{ color: "success", component: <i className="ni ni-paper-diploma" /> }}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="sales"
-              count={`Ks ${!isLoading && data.orders[0].toLocaleString() && data?.orders[0].totalSale.toLocaleString()}`}
+              count={`Ks ${!isLoading && data?.orders[0].toLocaleString() && data?.orders[0].totalSale.toLocaleString()}`}
               icon={{ color: "warning", component: <i className="ni ni-cart" /> }}
             />
           </Grid>

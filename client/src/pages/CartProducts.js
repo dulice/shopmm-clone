@@ -1,11 +1,9 @@
 import {
   CardContent,
-  Checkbox,
   Grid,
   Container,
   Card,
   Typography,
-  FormControlLabel,
   Box,
   Alert,
   Button,
@@ -27,24 +25,21 @@ const CartProducts = () => {
   return (
     <>
       <Container>
-        <Grid container spacing={2} my={2} position="relative">
+        <Grid container spacing={2} my={2} >
           {items.length <= 0 ? (
             <Alert severity="warning">
               No Product Add to Cart. Go To <Link to="/">Homepage</Link>
             </Alert>
           ) : (
             items.map((item) => (
-              <Grid item xs={9} key={item._id}>
+              <Grid item xs={12} sm={9} key={item._id}>
                 <Card>
                   <CardContent>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label={
-                        <Grid container alignItems="center" spacing={2}>
-                          <Grid item xs={2}>
+                  <Grid container alignItems="center" spacing={2}>
+                          <Grid item xs={3} sm={2}>
                             <img src={item.images[0]} alt="" width="100%" />
                           </Grid>
-                          <Grid item xs={5}>
+                          <Grid item xs={9} sm={5}>
                             <Typography variant="body2">
                               {item.productName}
                             </Typography>
@@ -52,10 +47,10 @@ const CartProducts = () => {
                               only {item.stock} item(s) in stock
                             </Typography>
                           </Grid>
-                          <Grid item xs={2}>
+                          <Grid item xs={4} sm={2}>
                             <Discount product={item} />
                           </Grid>
-                          <Grid item xs={1}>
+                          <Grid item xs={8} sm={1}>
                             <Box sx={{ display: "flex", gap: 1 }}>
                               <QuantityButton
                                 quantity={quantity}
@@ -69,14 +64,12 @@ const CartProducts = () => {
                             </Typography>
                           </Grid>
                         </Grid>
-                      }
-                    />
                   </CardContent>
                 </Card>
               </Grid>
             ))
           )}
-          <Grid item xs={3} sx={{position: "absolute", right: 0}}>
+          <Grid item xs={12} sm={3}>
             <Stack spacing={3}>
               <Typography variant="h6">Order Summery</Typography>
               <OrderPrice />

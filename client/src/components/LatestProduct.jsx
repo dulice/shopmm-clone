@@ -9,7 +9,7 @@ const LatestProduct = () => {
   const { data, isLoading } = useProductsQuery(6);
 
   return (
-    <Box paddingY={2} minWidth={1024}>
+    <Box paddingY={2}>
       <Container>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h5" color="orange" paddingY={1}>

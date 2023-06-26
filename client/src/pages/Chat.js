@@ -72,8 +72,10 @@ const Chat = () => {
                     </Box>
                     <form onSubmit={handleSendMessage}>
                         <Box sx={{position: "absolute", bottom: 0, left: 0, right: 0}}>
-                            <TextField placeholder="Message..." sx={{width: "94%"}} value={message} onChange={(e) => setMessage(e.target.value)} />
-                            <Button><SendIcon/></Button>
+                            <Box sx={{display: "flex"}}>
+                                <TextField placeholder="Message..." sx={{flex: 1}} value={message} onChange={(e) => setMessage(e.target.value)} />
+                                <Button variant='contained' disabled={message.length < 1}><SendIcon/></Button>
+                            </Box>
                         </Box>
                     </form>
                 </CardContent>

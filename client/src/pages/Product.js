@@ -62,18 +62,16 @@ const Product = () => {
   };
 
   return (
-    <Container
-      sx={{ minWidth: "1024px", marginY: "2rem", overflowY: "scroll" }}
-    >
+    <Container sx={{ marginY: "2rem" }}>
       {isLoading ? (
         <Loading />
       ) : (
         <>
           <Grid container spacing={3} mb="2rem">
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <ProductImage product={product} />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item sm={8} md={4}>
               <Box
                 sx={{
                   display: "flex",
@@ -111,7 +109,9 @@ const Product = () => {
                 </Alert>
                 <Stack direction="row" spacing={2}>
                   <Button variant="contained" onClick={handleAddToCart}>
-                    <Link to="/cartProducts" className="inherit">Buy Now</Link>
+                    <Link to="/cartProducts" className="inherit">
+                      Buy Now
+                    </Link>
                   </Button>
                   <Button
                     variant="contained"
@@ -123,28 +123,33 @@ const Product = () => {
                 </Stack>
               </Box>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item sm={6} md={4}>
               <ProductService />
             </Grid>
           </Grid>
-          <Stack spacing={2} mb="2rem">
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Grid container>
+            <Grid item xs={12} md={10}>
               <Typography variant="h6" fontSize="1rem" fontWeight="700">
                 Product details of {product.productName}
               </Typography>
-              <Typography variant="body2" fontSize="1rem" fontWeight="700">
-                Seller: {product.ownerName}
-              </Typography>
-              <Avatar sx={{ bgcolor: deepOrange[500] }} onClick={handleChat}>
-                <ChatIcon />
-              </Avatar>
-            </Box>
-            <ul className="inherit">
-              {product.description.split(".").map((des, index) => (
-                <li key={index}>{des}</li>
-              ))}
-            </ul>
-          </Stack>
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <Box sx={{ display: "flex", alignItems: "flex-end", gap: 3 }}>
+                <Typography variant="body2" fontSize="1rem" fontWeight="700">
+                  Seller: {product.ownerName}
+                </Typography>
+
+                <Avatar sx={{ bgcolor: deepOrange[500] }} onClick={handleChat}>
+                  <ChatIcon />
+                </Avatar>
+              </Box>
+            </Grid>
+          </Grid>
+          <ul className="inherit">
+            {product.description.split(".").map((des, index) => (
+              <li key={index}>{des}</li>
+            ))}
+          </ul>
           <Box>
             {product.reviews.map((review) => (
               <Card key={review._id}>

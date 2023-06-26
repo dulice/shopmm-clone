@@ -56,13 +56,16 @@ export default function SecondNav() {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate(`/search?search=${search}`);
+    setSearch("");
   }
   return (
       <>
-        <Toolbar sx={{justifyContent: "space-between"}}>
-          <Link to="/">
-            <img src={Logo} alt='' style={{height: "40px"}}/>
-          </Link>
+        <Toolbar sx={{justifyContent: "space-between", p: 0}}>
+          <Box sx={{display: {xs: "none", sm: "block"}}}>
+            <Link to="/">
+              <img src={Logo} alt='' style={{height: "40px"}}/>
+            </Link>
+          </Box>
           <form  onSubmit={handleSubmit}>
               <Search>
                 <SearchIconWrapper>

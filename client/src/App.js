@@ -5,7 +5,7 @@ import {CartProducts, Category, Chat, Checkout, CustomerCare, Error, Home, Login
 
 function App() {
   return (
-    <Box sx={{minWidth: "1024px"}}>
+    <Box>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<Signup />} />

@@ -8,18 +8,18 @@ import DSS from '../../assets/image/dss.png';
 const Footer2 = () => {
   return (
     <Container sx={{ padding: "1rem 0" }}>
-      <Grid container spacing={1}>
-        <Grid item xs={3}>
-          <Typography variant="h6">Payment Methods</Typography>
-          <Box sx={{ display: "flex", gap: "10px", margin: "1rem 0" }}>
+      <Grid container spacing={1} sx={{justifyContent: "center", alignItems: "center"}}>
+        <Grid item xs={12} sm={6} md={3}>
+          <Typography variant="h6" sx={{textAlign: "center"}}>Payment Methods</Typography>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: "10px", margin: "1rem 0" }}>
             <Visa style={{ width: 60 }} />
             <Mastercard style={{ width: 60 }} />
             <Jcb style={{ width: 60 }} />
           </Box>
         </Grid>
-        <Grid item xs={3}>
-          <Typography variant="h6">Shop International</Typography>
-          <Box sx={{ display: "flex", gap: "10px", margin: "1rem 0" }}>
+        <Grid item xs={12} sm={6} md={3}>
+          <Typography variant="h6" sx={{textAlign: "center"}}>Shop International</Typography>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: "10px", margin: "1rem 0" }}>
             <BD style={{ height: "30px" }} />
             <PK style={{ height: "30px" }} />
             <LK style={{ height: "30px" }} />
@@ -27,20 +27,20 @@ const Footer2 = () => {
             <NP style={{ height: "30px" }} />
           </Box>
         </Grid>
-        <Grid item xs={3}>
-          <Typography variant="h6">Follow Us</Typography>
-          <Box sx={{ display: "flex", gap: "10px" }}>
+        <Grid item xs={12} sm={6} md={3}>
+          <Typography variant="h6" sx={{textAlign: "center"}}>Follow Us</Typography>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: "10px" }}>
           <SocialIcon url="https://facebook.com/ShopAppMM" target="_blank" />
           <SocialIcon url="https://instagram.com/shop_myanmar" target="_blank" />
           <SocialIcon url="https://youtube.com//channel/UCcGyVgad9JF8fv8QmpUV5ag" target="_blank" />
           </Box>
         </Grid>
-        <Grid item xs={3}>
-          <Typography variant="h6">Verify By</Typography>
-          <Avatar src={DSS} variant="square" sx={{width: 200, height: "auto"}}/>
+        <Grid item xs={12} sm={6} md={3}>
+          <Typography variant="h6" sx={{textAlign: "center"}}>Verify By</Typography>
+          <Avatar src={DSS} variant="square" sx={{width: 200, height: "auto", margin: "auto"}}/>
         </Grid>
       </Grid>
-      <Typography variant="body1"> &copy; Shop 2022</Typography>
+      <Typography variant="body1" textAlign="center"> &copy; Shop 2022</Typography>
     </Container>
   );
 };

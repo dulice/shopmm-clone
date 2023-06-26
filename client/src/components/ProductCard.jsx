@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   return (
     <>
-      <Grid item xs={2} key={product._id}>
+      <Grid item xs={6} sm={3} md={2} key={product._id}>
         <Card sx={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <Link to={`/product/${product._id}`} className="inherit">
             <CardMedia

@@ -8,7 +8,7 @@ const Sale = () => {
     const { data, isLoading } = useProductsQuery(30);
     const products = data?.filter(el => el.discount > 0);
   return (
-    <Box paddingY={2} minWidth={1024}>
+    <Box paddingY={2}>
       <Container>
         <img style={{width: "100%"}} src="https://gcp-img.slatic.net/lazada/b8ba0502-4031-4c13-8db5-c368ca11208f_MM-1920-250.jpg" alt='' />
         <Grid container spacing={2} alignItems="stretch">

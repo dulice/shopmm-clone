@@ -10,7 +10,7 @@ const Search = () => {
   const { data, isLoading } = useSearchProductQuery(search);
   return (
     <>
-      <Box paddingY={2} minWidth={1024}>
+      <Box paddingY={2}>
         <Container>
           <Grid container spacing={2} alignItems="stretch">
             {isLoading ? (

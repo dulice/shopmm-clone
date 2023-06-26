@@ -19,7 +19,7 @@ const JustForYou = () => {
   }, [data]);
 
   return (
-    <Box paddingY={2} minWidth={1024}>
+    <Box paddingY={2}>
       <Container>
         <Typography variant="h5" color="orange" paddingY={1}>
           Just For You

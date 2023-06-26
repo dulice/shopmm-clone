@@ -30,7 +30,7 @@ const CategoriesHome = () => {
         ) : (
           <Grid container spacing={2} alignItems="stretch">
             {categories.map((category, index) => (
-              <Grid item xs={1.5} key={index}>
+              <Grid item xs={3} sm={1.5} key={index}>
                 <Card sx={{ height: "100%" }}>
                   <CardMedia
                     component="img"

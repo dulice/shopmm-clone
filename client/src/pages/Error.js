@@ -7,7 +7,7 @@ const Error = () => {
   return (
     <Container>
       <Link to="/">
-        <img src={ErrorImg} alt="" />
+        <img className='image' src={ErrorImg} alt="" />
       </Link>
     </Container>
   )

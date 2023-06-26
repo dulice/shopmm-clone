@@ -74,7 +74,7 @@ const Login = () => {
       <Container maxWidth="md">
         <form onSubmit={handleLogin}>
           <Grid container spacing={3}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Typography variant="h6" sx={{ margin: "3rem 0" }}>
                 Welcome to Shop! Please login.
               </Typography>
@@ -109,7 +109,7 @@ const Login = () => {
                 </FormControl>
               </Stack>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Typography
                 variant="body2"
                 color="GrayText"

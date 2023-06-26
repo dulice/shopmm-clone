@@ -17,7 +17,7 @@ const Footer1 = () => {
     <Box sx={{backgroundColor: "#2E2E54", color: "white", padding: "2rem"}}>
         <Container>
       <Grid container alignItems="center">
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <Stack spacing={3}>
             <div>
               <Typography variant="h5">Customer Care</Typography>
@@ -53,7 +53,7 @@ const Footer1 = () => {
             </div>
           </Stack>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <div>
             <Typography variant="h5">Shop</Typography>
             <Typography variant="body2">
@@ -76,7 +76,7 @@ const Footer1 = () => {
             </Typography>
           </div>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <Stack spacing={2}>
             <div>
               <Avatar
@@ -91,7 +91,7 @@ const Footer1 = () => {
               <Typography variant="body2">Download App</Typography>
             </div>
             <Grid container>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <MLink href="https://apps.apple.com/us/app/shop-com-mm-online-shopping/id979214282?ls=1&scm=1003.4.icms-zebra-100010652-2860784.OTHER_5417611007_2539922&spm=a2a0e.pdp.1_top.15.7020dx3Bdx3BwL">
                   <Avatar
                     variant="square"
