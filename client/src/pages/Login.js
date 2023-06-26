@@ -12,6 +12,7 @@ import {
   OutlinedInput,
   FormHelperText,
   CircularProgress,
+  Box,
 } from "@mui/material";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -124,7 +125,7 @@ const Login = () => {
                     <CircularProgress size={20} sx={{ marginLeft: "10px" }} />
                   )}
                 </Button>
-                <Typography variant="body2" color="orange">
+                {/* <Typography variant="body2" color="orange">
                   Or login with
                 </Typography>
                 <Button
@@ -134,7 +135,12 @@ const Login = () => {
                   onClick={handleGoogle}
                 >
                   Google
-                </Button>
+                </Button> */}
+                <Box>
+                  <Typography variant="body2">Use the follow data to login</Typography>
+                  <Typography color="primary" variant="body2">Email: emma@gmail.com</Typography>
+                  <Typography color="primary" variant="body2">Password: 123456</Typography>
+                </Box>
               </Stack>
             </Grid>
           </Grid>

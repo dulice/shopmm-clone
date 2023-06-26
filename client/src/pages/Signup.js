@@ -199,7 +199,7 @@ const Signup = () => {
                   By clicking "SIGN UP", I agree to Shop's Terms of Use and
                   Privacy Policy
                 </Typography>
-                <Typography variant="body2" color="orange">
+                {/* <Typography variant="body2" color="orange">
                   Or sign up with
                 </Typography>
                 <Button
@@ -209,7 +209,7 @@ const Signup = () => {
                   onClick={handleGoogle}
                 >
                   Google
-                </Button>
+                </Button> */}
                 <Typography variant="body2" color="GrayText">
                   Already member? <Link to="/login">Login</Link> here.
                 </Typography>
