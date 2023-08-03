@@ -55,6 +55,9 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if(email === "" || password === "") {
+      return toast.error("Please fill all the fields")
+    }
     dispatch(resetItems());
     try {
       const data = await userLogin({ email, password }).unwrap();
@@ -65,6 +68,7 @@ const Login = () => {
     }
   };
 
+  // cannot login in production mode
   const handleGoogle = (e) => {
     e.preventDefault();
     window.open(`${process.env.REACT_APP_API_URL}/auth/google`, "_self");
@@ -127,8 +131,8 @@ const Login = () => {
                 </Button>
                 {/* <Typography variant="body2" color="orange">
                   Or login with
-                </Typography>
-                <Button
+                </Typography> */}
+                {/* <Button
                   variant="contained"
                   color="error"
                   startIcon={<Google />}

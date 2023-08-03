@@ -92,16 +92,8 @@ const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 })
 
-const __variableOfChoice = path.resolve();
-app.use(express.static(path.join(__variableOfChoice, '/client/build')));
-app.use(express.static(path.join(__variableOfChoice, '/dashboard/build')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__variableOfChoice, '/cliend/build/index.html'));
-    res.sendFile(path.join(__variableOfChoice, '/dashboard/build/index.html'));
-});
-
-app.use((err, req, res, next) => {
-    res.status(500).json({message: err.message})
+app.get("*",(req, res, next) => {
+    res.status(200).json({message: "Hello World"})
 })
 
 http.listen(server);
