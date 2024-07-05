@@ -1,0 +1,20 @@
+@layer components {
+    .btn-primary {
+      @apply py-2 px-4 disabled:cursor-not-allowed disabled:bg-primary-100 bg-primary-100 text-white font-semibold rounded-sm shadow-sm hover:bg-primary-200 active:bg-primary-300 transition-all duration-300;
+    }
+    .btn-secondary {
+      @apply py-2 px-4 disabled:cursor-not-allowed disabled:bg-secondary-100 bg-secondary-100 text-white font-semibold rounded-sm shadow-sm hover:bg-secondary-200 active:bg-secondary-300 transition-all duration-300;
+    }
+    .btn-success {
+      @apply py-2 px-4 disabled:cursor-not-allowed disabled:bg-success-100 bg-success-100 text-white font-semibold rounded-sm shadow-sm hover:bg-success-200 active:bg-success-300 transition-all duration-300;
+    }
+    .btn-danger {
+      @apply py-2 px-4 disabled:cursor-not-allowed disabled:bg-danger-100 bg-danger-100 text-white font-semibold rounded-sm shadow-sm hover:bg-danger-200 active:bg-danger-300 transition-all duration-300;
+    }
+    .btn-warning {
+      @apply py-2 px-4 disabled:cursor-not-allowed disabled:bg-warning-100 bg-warning-100 text-white font-semibold rounded-sm shadow-sm hover:bg-warning-200 active:bg-warning-300 transition-all duration-300;
+    }
+    .btn {
+      @apply py-2 px-4 disabled:cursor-not-allowed font-semibold rounded-sm shadow-sm;
+    }
+  }

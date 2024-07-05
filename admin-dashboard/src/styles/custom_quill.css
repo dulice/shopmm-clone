@@ -1,0 +1,22 @@
+.ql-editor {
+    @apply h-64;
+}
+.ql-container.ql-snow {
+    @apply bg-light-100 dark:bg-dark-100 outline-primary-100 px-4 py-2 rounded-md border border-primary-100 transition-all duration-300 hover:shadow-xl;
+}
+.ql-toolbar.ql-snow {
+    @apply bg-light-100 dark:bg-dark-300 outline-primary-100 px-4 py-2 rounded-md border border-primary-100 transition-all duration-300 hover:shadow-xl;
+}
+
+.rdrDefinedRangesWrapper,
+.rdrCalendarWrapper,
+.rdrDateDisplayWrapper,
+.rdrDateDisplayItem {
+    @apply dark:bg-dark-100
+}
+.rdrDateDisplay {
+    @apply text-primary-100 !important
+}
+.rdrStaticRange {
+    @apply dark:border-b-dark-100
+}

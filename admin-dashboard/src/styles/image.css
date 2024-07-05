@@ -1,0 +1,11 @@
+@layer components {
+    .avatar {
+        @apply w-10 h-10 rounded-full object-cover
+    }
+    .avatar-md {
+        @apply w-14 h-14 rounded-full object-cover
+    }
+    .avatar-lg {
+        @apply w-20 h-20 rounded-full object-cover
+    }
+}

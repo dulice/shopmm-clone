@@ -7,7 +7,7 @@ const reviewSchema = mongoose.Schema({
   rating: { type: Number, default: 0, },
 });
 
-const productSchema = mongoose.Schema({
+const productSchema = new mongoose.Schema({
     ownerId: {type: String, required: true  },
     ownerName: {type: String, required: true},
     productName: { type: String, required: true, },

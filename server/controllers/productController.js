@@ -51,6 +51,11 @@ const product = async (req, res) => {
   }
 };
 
+const myProducts = async (req, res) => {
+  const products = await Product.find({ownerId: req.params.ownerId});
+  res.status(200).json(products);
+}
+
 const categoriesWithImage = async (req, res) => {
   try {
     const categories = await Product.aggregate([
@@ -144,6 +149,7 @@ const writeReview = async (req, res) => {
 module.exports = {
   createProduct,
   getProducts,
+  myProducts,
   updateProduct,
   deleteProduct,
   categoriesWithImage,

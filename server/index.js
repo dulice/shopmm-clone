@@ -29,7 +29,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: ["http://localhost:3000", "http://localhost:3001", process.env.CLIENT_URL], 
+    origin: [process.env.DASHBOARD_URL, process.env.CLIENT_URL], 
     methods: 'GET,PUT,POST,DELETE',
     credentials: true
 }))
@@ -40,7 +40,7 @@ app.use(express.json({limit: "50mb"}));
 const http = createServer(app);
 const io = new Server(http, {
     cors: {
-    origin: ["http://localhost:3000", "http://localhost:3001", process.env.CLIENT_URL], 
+    origin: [process.env.DASHBOARD_URL, process.env.CLIENT_URL], 
     }
 })
 

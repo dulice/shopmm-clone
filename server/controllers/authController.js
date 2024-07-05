@@ -60,4 +60,9 @@ const logout = (req, res) => {
     res.redirect(CLIENT_URL);
 }
 
-module.exports = { signup, login, loginSuccess, loginFail, logout}
+const getUser = async (req, res) => {
+    const user = await User.findById(req.params.id);
+    res.status(200).json(user);
+}
+
+module.exports = { signup, login, loginSuccess, loginFail, logout, getUser };

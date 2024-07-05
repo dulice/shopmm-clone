@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
-const { signup, login, loginSuccess, loginFail, logout } = require("../controllers/authController");
+const { signup, login, loginSuccess, loginFail, logout, getUser } = require("../controllers/authController");
 
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000/";
 
@@ -16,5 +16,6 @@ router.get('/google/callback', passport.authenticate('google', {
     successRedirect: CLIENT_URL,
     failureRedirect: '/login/failed',
 }));
+router.get('/:id', getUser);
 
 module.exports = router;

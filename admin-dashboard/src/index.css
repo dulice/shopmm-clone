@@ -1,0 +1,17 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "./styles/button.css";
+@import "./styles/form.css";
+@import "./styles/image.css";
+@import "./styles/layout.css";
+@import "./styles/custom_quill.css";
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+

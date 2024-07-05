@@ -1,0 +1,11 @@
+@layer components {
+    .card {
+        @apply p-2 md:p-4 mb-4 border text-dark-200 dark:text-light-200 border-light-200 bg-light-100 dark:bg-dark-200 dark:border-dark-200 shadow-md rounded-md transition-all duration-500
+    }
+    .active {
+        @apply bg-light-300 dark:bg-dark-100 border-l-4 border-primary-100 transition-all duration-100;
+    }
+    .hover {
+        @apply cursor-pointer hover:bg-light-300 hover:dark:bg-dark-100 transition-all duration-100;
+    }
+}

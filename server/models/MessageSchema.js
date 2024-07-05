@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MessageSchema = mongoose.Schema({
+const MessageSchema = new mongoose.Schema({
     conversationId: {
         type: String,
         required: true
