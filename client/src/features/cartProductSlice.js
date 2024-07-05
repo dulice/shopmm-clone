@@ -21,14 +21,8 @@ export const discountAmount = (price, discount) => {
   };
 
 const priceDetail = (state) => {
-    let price = 0;
-    const priceArr = state.items.map(item => {
-        let itemPrice = discountAmount(item.price, item.discount) * item.quantity;
-        price += itemPrice;
-        return price;
-    });
-    state.productsPrice = priceArr[priceArr.length - 1] || 0 ;
-    state.shippingFees = 2990;
+    let price = state.items.reduce((sum, item) => (discountAmount(item.price, item.discount) * item.quantity) + sum, 0);
+    state.productsPrice = price ;
     state.totalPrice = price + state.shippingFees;
     localStorage.setItem('productsPrice', JSON.stringify(state.productsPrice));
     localStorage.setItem('totalPrice', JSON.stringify(state.totalPrice));
@@ -37,11 +31,11 @@ const priceDetail = (state) => {
 const cartProductSlice = createSlice({
     name: "cartItems",
     initialState: {
-        items: cartItems ? cartItems : [],
-        productsPrice: price ? price : 0,
+        items: cartItems ?? [],
+        productsPrice: price ?? 0,
         shippingFees: 2990,
-        totalPrice: sumPrice ? sumPrice : 0,
-        address: userAddress ? userAddress : {},
+        totalPrice: sumPrice ?? 0,
+        address: userAddress ?? {},
     },
     reducers: {
         addToCart: (state, action) => {

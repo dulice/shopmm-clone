@@ -1,10 +1,11 @@
-import { Box, Button, Container, Stack, TextField } from "@mui/material";
+import { Box, Button, Container, IconButton, Stack, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress } from "../features/cartProductSlice";
 import StepState from "../components/StepState";
 import { toast } from "react-toastify";
+import { ArrowBack } from "@mui/icons-material";
 
 const ShippingAddress = () => {
   const { address: shippingAdd } = useSelector(state => state.cartItems);
@@ -47,6 +48,9 @@ const ShippingAddress = () => {
   return (
     <Box my={3}>
       <Container>
+        <IconButton onClick={() => navigate(-1)}>
+          <ArrowBack />
+        </IconButton>
         <StepState step={0} />
         <form onSubmit={handleSubmit}>
           <Stack spacing={2}>

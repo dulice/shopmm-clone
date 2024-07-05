@@ -7,19 +7,19 @@ const OrderPrice = () => {
   );
   return (
     <>
-      <table>
+      <table style={{margin: "1rem 0"}}>
         <tbody>
           <tr>
             <td>SubTotal: </td>
-            <td>Ks {productsPrice} </td>
+            <td style={{ color: "#F26924", fontWeight: 700 }}>Ks {productsPrice.toLocaleString()} </td>
           </tr>
           <tr>
             <td>Shipping Fees: </td>
-            <td>Ks {shippingFees} </td>
+            <td style={{color: "#F26924", fontWeight: 700}}>Ks {shippingFees.toLocaleString()} </td>
           </tr>
           <tr>
             <td>Total: </td>
-            <td>Ks {totalPrice} </td>
+            <td style={{ color: "#F26924", fontWeight: 700 }}>Ks {totalPrice.toLocaleString()} </td>
           </tr>
         </tbody>
       </table>

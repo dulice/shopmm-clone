@@ -8,8 +8,6 @@ import { Provider } from "react-redux";
 import store from "./features/Store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "./components/Footer/Footer";
-import Navigation from "./components/Navigation/Navigation";
 import { BrowserRouter } from "react-router-dom"; 
 import ScrollToTop from "./components/ScrollToTop";
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
@@ -22,10 +20,8 @@ root.render(
       <Provider store={store}>
         <ToastContainer position="top-center" autoClose={3000} />
         <BrowserRouter>
-          <Navigation />
           <ScrollToTop />
           <App />
-          <Footer />
         </BrowserRouter>
       </Provider>
   </React.StrictMode>

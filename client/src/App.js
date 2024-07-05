@@ -1,11 +1,17 @@
 import { Box } from '@mui/material';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useHref } from 'react-router-dom';
 import UserProtected from './protectedRoute/UserProtected';
 import {CartProducts, Category, Chat, Checkout, CustomerCare, Error, Home, Login, NewArrival, OrderDetail, Product, Review, Sale, Search, SellOnShop, ShippingAddress, Signup, Success, TrackOrder} from './pages';
+import Footer from './components/Footer/Footer';
+import Navigation from "./components/Navigation/Navigation";
+
+const excludeUrl = ['chat', 'shipping-address', 'checkout', 'review']
 
 function App() {
+  const href = useHref();
   return (
     <Box>
+      {!excludeUrl.includes(href.split('/')[1]) && <Navigation />}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<Signup />} />
@@ -27,6 +33,7 @@ function App() {
         <Route path='/chat/:id' element={<UserProtected><Chat /></UserProtected>} />
         <Route path="*" element={<Error />} />
       </Routes>
+      {!excludeUrl.includes(href.split('/')[1]) && <Footer />}
     </Box>
   );
 }

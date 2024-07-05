@@ -7,8 +7,8 @@ const productApi = createApi({
 
     endpoints: (builder) => ({
         products: builder.query({
-            query: (limit) => ({
-                url: `?limit=${limit || 6}`,
+            query: (limit = 6) => ({
+                url: `?limit=${limit}`,
             }),
         }),
         singleProduct: builder.query({

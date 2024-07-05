@@ -28,17 +28,18 @@ const OrderDetail = () => {
     },
     {
       label: "Reached Our Warehouse",
-      description: "Your package has arrived at our warehouse from where it'll be sent to your address soon."
+      description:
+        "Your package has arrived at our warehouse from where it'll be sent to your address soon.",
     },
     {
       label: "Package being Prepared",
-      description: "Your package is being prepared by the seller."
+      description: "Your package is being prepared by the seller.",
     },
     {
       label: "Package Processing Started",
-      description: "Your package is ready to be prepared by the seller"
-    }
-  ]
+      description: "Your package is ready to be prepared by the seller",
+    },
+  ];
   return (
     <Box>
       <Container>
@@ -54,15 +55,18 @@ const OrderDetail = () => {
                     Receiver: {data.address.fullName}
                   </Typography>
                   <Typography variant="caption" color="gray">
-                    {data.address.address}, {data.address.city}, 
+                    {data.address.address}, {data.address.city},
                     {data.address.state}
                   </Typography>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent>
-                  <Stepper activeStep={data.isDelivered === "pending" ? 0 : 3} orientation="vertical">
-                    {steps.map(step => (
+                  <Stepper
+                    activeStep={data.isDelivered === "pending" ? 0 : 3}
+                    orientation="vertical"
+                  >
+                    {steps.map((step) => (
                       <Step key={step.label}>
                         <StepLabel>{step.label}</StepLabel>
                         <StepContent>{step.description}</StepContent>
@@ -72,23 +76,21 @@ const OrderDetail = () => {
                 </CardContent>
               </Card>
               <Card>
-                <CardContent>
-                  <Grid container spacing={3}>
-                    {data?.items.map(item => (
-                      <>
-                        <Grid item xs={1} key={item._id}>
-                          <img src={item.images[0]} alt="" width="100%" />
-                        </Grid>
-                        <Grid item xs={11}>
-                          <Typography variant="body2">
-                            {item.productName}
-                          </Typography>
-                          <Typography variant="h6">Ks {item.price}</Typography>
-                        </Grid>
-                      </>
-                    ))}
-                  </Grid>
-                </CardContent>
+                <Stack spacing={3}>
+                  {data?.items.map((item) => (
+                    <Grid container spacing={3} key={item._id}>
+                      <Grid item xs={1}>
+                        <img src={item.images[0]} alt="" width="100%" />
+                      </Grid>
+                      <Grid item xs={11}>
+                        <Typography variant="body2">
+                          {item.productName}
+                        </Typography>
+                        <Typography variant="h6">Ks {item.price}</Typography>
+                      </Grid>
+                    </Grid>
+                  ))}
+                </Stack>
               </Card>
             </>
           )}

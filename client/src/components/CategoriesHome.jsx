@@ -7,7 +7,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCategoriesQuery } from "../api/productApi";
 import { randomProduct } from "../features/cartProductSlice";
@@ -15,11 +15,15 @@ import Loading from "./Loading";
 
 const CategoriesHome = () => {
   const { data, isLoading } = useCategoriesQuery();
+  const [categories, setCategories] = useState([]);
 
-  const filterCategory = [
-    ...new Map(data?.map((item) => [item.slug, item])).values(),
-  ];
-  const categories = randomProduct(filterCategory, 16);
+  useEffect(() => {
+    const filterCategory = [
+      ...new Map(data?.map((item) => [item.slug, item])).values(),
+    ];
+    setCategories(randomProduct(filterCategory, 16));
+  },[isLoading]);
+
 
   return (
     <Box>

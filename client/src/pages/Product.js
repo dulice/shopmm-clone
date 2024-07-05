@@ -12,6 +12,7 @@ import {
   Card,
   CardContent,
   Avatar,
+  IconButton,
 } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import { useSingleProductQuery } from "../api/productApi";
@@ -24,6 +25,7 @@ import Discount from "../components/Discount";
 import QuantityButton from "../components/QuantityButton";
 import { deepOrange } from "@mui/material/colors";
 import { io } from "socket.io-client";
+import { ArrowBack } from "@mui/icons-material";
 
 export const socket = io(process.env.REACT_APP_API_URL);
 
@@ -67,6 +69,9 @@ const Product = () => {
         <Loading />
       ) : (
         <>
+          <IconButton onClick={() => navigate(-1)}>
+            <ArrowBack />
+          </IconButton>
           <Grid container spacing={3} mb="2rem">
             <Grid item xs={12} sm={4}>
               <ProductImage product={product} />
@@ -145,11 +150,7 @@ const Product = () => {
               </Box>
             </Grid>
           </Grid>
-          <ul className="inherit">
-            {product.description.split(".").map((des, index) => (
-              <li key={index}>{des}</li>
-            ))}
-          </ul>
+          <div dangerouslySetInnerHTML={{__html: product.description}}></div>
           <Box>
             {product.reviews.map((review) => (
               <Card key={review._id}>
